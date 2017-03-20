@@ -1,0 +1,21 @@
+{
+  "name": "web",
+  "description": "\"web project\"",
+  "main": "index.js",
+  "authors": [
+    "Your Name <you@example.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.3",
+    "bootstrap": "^3.3.7"
+  }
+}
