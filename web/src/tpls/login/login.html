@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Xenon Boostrap Admin Panel" />
+	<meta name="author" content="" />
+
+	<title>考勤签到系统用户登陆</title>
+
+
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+
+</head>
+<div class="page-body login-page">
+
+	
+	<div class="login-container">
+	
+		<div class="row">
+		<!--占8格，偏移两格-->
+			<div class="col-sm-8 col-sm-offset-2">
+				<!-- Errors container -->
+				<div class="errors-container">
+				
+									
+				</div>
+				
+				<!-- Add class "fade-in-effect" for login form effect -->
+				<form method="post" name="form" role="form" id="login" class="login-form">
+					
+					<div class="login-header">
+							<span>log in</span>
+						</a>
+						<div class ="row">
+							<div class="col-sm-10 col-sm-offset-2">
+						<h3>欢迎来到考勤签到后台管理系统</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+							<div class="col-sm-8">
+							<div class="form-group">
+								<label class="control-label" for="username" required></label>
+								<input type="text" placeholder="用户名" class="form-control input-dark" name="username" ng-model="user.username" id="username" required />
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<p></p>
+							<div ng-messages="form.username.$error" ng-show="form.username.$touched || form.$submitted">
+								<p ng-message="required">用户名不能为空</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<div class="form-group">
+								<label class="control-label" for="password"></label>
+								<input type="password"  class="form-control input-dark" placeholder="密码" name="password" ng-model="user.password" id="password" required/>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<p></p>
+							<div ng-messages="form.password.$error" ng-show="form.password.$touched || form.$submitted">
+								<p ng-message="required">密码不能为空</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-dark  btn-block text-left">
+							<i class="fa-lock"></i>
+							登陆
+						</button>
+					</div>
+
+					<div class="login-footer">
+						<a href="#">Forgot your password?</a>
+						
+						<div class="info-links">
+							<a href="#">ToS</a> -
+							<a href="#">Privacy Policy</a>
+						</div>
+						
+					</div>
+					
+				</form>
+				
+				<!-- External login -->
+				<div class="external-login">
+					<a href="#" class="facebook">
+						<i class="fa-facebook"></i>
+						Facebook Login
+					</a>
+					
+					<!-- 
+					<a href="#" class="twitter">
+						<i class="fa-twitter"></i>
+						Login with Twitter
+					</a>
+					
+					<a href="#" class="gplus">
+						<i class="fa-google-plus"></i>
+						Login with Google Plus
+					</a>
+					 -->
+				</div>
+				
+			</div>
+
+		</div>
+		
+	</div>
+	<!-- Bottom Scripts -->
+
+
+</div>
+</html>

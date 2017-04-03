@@ -1,0 +1,97 @@
+<div class="page-title">
+
+    <div class="title-env">
+        <h1 class="title">DataTable</h1>
+        <p class="description">Dynamic table variants with pagination and other controls</p>
+    </div>
+
+    <div class="breadcrumb-env">
+
+        <ol class="breadcrumb bc-1">
+            <li>
+                <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+            </li>
+            <li>
+
+                <a href="tables-basic.html">Tables</a>
+            </li>
+            <li class="active">
+
+                <strong>Data Tables</strong>
+            </li>
+        </ol>
+
+    </div>
+
+</div>
+
+<!-- Basic Setup -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Basic Setup</h3>
+
+        <div class="panel-options">
+            <a href="#" data-toggle="panel">
+                <span class="collapse-icon">&ndash;</span>
+                <span class="expand-icon">+</span>
+            </a>
+            <a href="#" data-toggle="remove">
+                &times;
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <td>用户ID</td>
+                        <td>用户名</td>
+                        <td>手机号</td>
+                        <td>邮箱</td>
+                        <td>角色</td>
+                        <td>创建者</td>
+                        <td>创建时间</td>
+                        <td>修改者</td>
+                        <td>修改时间</td>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in userList">
+                        <td>{{user.id}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.tel}}</td>
+                        <td>{{user.mail}}</td>
+                        <td>{{user.role}}</td>
+                        <td>{{user.createPeople}}</td>
+                        <td>{{user.createTime}}</td>
+                        <td>{{user.modifyPeople}}</td>
+                        <td>{{user.modifyTime}}</td>
+                        <td><a ng-click="open('lg');" class="fa fa-sun-o" aria-hidden="true"></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- Table exporting -->
+
+</div>
+
+
+</div>
+
+</div>
+<!-- end: Chat Section -->
+
+
+</div>
