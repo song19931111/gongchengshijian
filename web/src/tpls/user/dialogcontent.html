@@ -1,17 +1,47 @@
 <!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+<div class="modal-header">
+    <h3 class="modal-title">修改数据</h3>
+</div>
+<div class="modal-body">
+    <!--form表单-->
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="username" name="username" placeholder="用户名"
+                       ng-model="item.username">
+            </div>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码"
+                       ng-model="item.password">
+            </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <div class="form-group">
+            <label for="tel" class="col-sm-2 control-label">手机号</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="tel" name="tel" placeholder="手机号" ng-model="item.tel">
+            </div>
         </div>
+        <div class="form-group">
+            <label for="mail" class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="mail" name="mail" placeholder="邮箱" ng-model="item.mail">
+            </div>
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label for="mail" class="col-sm-2 control-label">角色</label>-->
+            <!--<div class="col-sm-10">-->
+                <!--<select class="form-control" ng-model="item.role" ng-options="item.rolelist">-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
 

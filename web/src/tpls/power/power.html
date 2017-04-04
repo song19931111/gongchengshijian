@@ -1,0 +1,45 @@
+<div class="page-title">
+
+    <div class="title-env">
+        <h1 class="title">权限管理</h1>
+        <p class="description">管理用户权限</p>
+    </div>
+
+    <div class="breadcrumb-env">
+
+        <ol class="breadcrumb bc-1">
+            <li>
+                <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+            </li>
+            <li>
+
+                <a href="tables-basic.html">Tables</a>
+            </li>
+            <li class="active">
+
+                <strong>Data Tables</strong>
+            </li>
+        </ol>
+
+    </div>
+
+</div>
+<div class="panel panel-default" style="height:auto!important;min-height: 360px;">
+    <form>
+    <div class="row" ng-repeat="item in powerList">
+        <div class="form-group">
+            <div style="font-family: '楷体';"><strong>{{item.powerFullName}}</strong></div><br>
+                <!--<div class="radio-inline">-->
+            <input type="radio" name="{{item.powerName}}" ng-checked='item.checked=="0"'/>开启权限
+            <!--</div>-->
+                <!--<div class="radio-inline">-->
+            <input type="radio" name="{{item.powerName}}" style="margin-left: 10px;margin-top:10px;" ng-checked='item.checked=="1"'/>关闭权限
+                <!--</div>-->
+            <!--{{item.checked=='0'}}-->
+        </div><hr>
+    </div>
+    <div class="row form-group">
+        <button class="btn btn-info" type="submit">保存</button>
+     </div>
+    </form>
+</div>

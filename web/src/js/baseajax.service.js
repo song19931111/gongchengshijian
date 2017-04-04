@@ -2,7 +2,7 @@
  * Created by xiangsong on 2017/4/3.
  */
 angular.module('mainApp')
-    .constant('DOMAIN','test/data.json');
+    .constant('DOMAIN','test/');
 angular.module('mainApp')
     .constant('PAGE_SIZE',20);
 angular.module('mainApp')
@@ -16,10 +16,16 @@ angular.module('mainApp')
             return $http({
                 method:'GET'
                 ,url:DOMAIN + this.moduleName
-                ,params:{
-                    pageSize:PAGE_SIZE
-                    ,pageIndex:index
-                }
+                // ,params:{
+                //     pageSize:PAGE_SIZE
+                //     ,pageIndex:index
+                // }
+            });
+        };
+        service.getAll = function() {
+            return $http({
+                method:'GET'
+                ,url:DOMAIN + this.moduleName
             });
         };
         service.get = function (id) {

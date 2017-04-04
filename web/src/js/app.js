@@ -5,34 +5,53 @@ var mainApp = angular.module('mainApp',['ui.router','ngMessages','tm.pagination'
 mainApp.config(function ($stateProvider,$urlRouterProvider) {
 
     $stateProvider
-        .state('index', {
-            url: '/index',
+        .state('base', {
+            url: '/',
             views: {
                 '': {
                     templateUrl: 'tpls/main.html'
                 },
-                'nav@index': {
-                    templateUrl: 'tpls/nav.html',
+                'nav@base': {
 
                 },
-                'content@index': {
+                'content@base': {
                     templateUrl: 'tpls/home/home.html'
                 },
-                'bottom@index':{
+                'bottom@base':{
                     templateUrl:'tpls/bottom.html'
                 }
             }
         })
-        .state('index.user', {
+        .state('base.index', {
+            url: 'index',
+            views: {
+                'nav@base': {
+                    templateUrl: 'tpls/nav.html',
+                    controller:'navCtrl'
+
+                }
+            }
+        })
+        .state('base.index.user', {
             url: '/user',
             views: {
-                'content@index': {
+                'content@base': {
                     templateUrl: 'tpls/user/user.html',
                     controller:"UserCtrl"
                 }
 
             }
         })
+        .state('base.index.power', {
+        url: '/power',
+        views: {
+            'content@base': {
+                templateUrl: 'tpls/power/power.html',
+                controller:"PowerCtrl"
+            }
+
+        }
+    })
         .state('login', {
             url: '/login',
             views: {
