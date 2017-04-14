@@ -23,26 +23,26 @@
 </head>
 <div class="page-body login-page">
 
-	
+
 	<div class="login-container">
-	
+
 		<div class="row">
 		<!--占8格，偏移两格-->
-			<div class="col-sm-8 col-sm-offset-2">
+			<div class="col-sm-11 col-sm-offset-2" style="height: 1024px">
 				<!-- Errors container -->
 				<div class="errors-container">
-				
-									
+
+
 				</div>
-				
+
 				<!-- Add class "fade-in-effect" for login form effect -->
 				<form method="post" name="form" role="form" id="login" class="login-form">
-					
+
 					<div class="login-header">
-							<span>log in</span>
+							<span></span>
 						</a>
 						<div class ="row">
-							<div class="col-sm-10 col-sm-offset-2">
+							<div class="col-sm-9 col-sm-offset-1" >
 						<h3>欢迎来到考勤签到后台管理系统</h3>
 							</div>
 						</div>
@@ -75,49 +75,34 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+					<div  class="col-sm-8">
 					<div class="form-group">
-						<button type="submit" class="btn btn-dark  btn-block text-left">
+						<button  type="submit" class="btn btn-dark  btn-block text-left" ng-click="userLogin()">
 							<i class="fa-lock"></i>
 							登陆
 						</button>
 					</div>
-
+					</div>
+					</div>
 					<div class="login-footer">
 						<a href="#">Forgot your password?</a>
-						
+
 						<div class="info-links">
 							<a href="#">ToS</a> -
 							<a href="#">Privacy Policy</a>
 						</div>
-						
+
 					</div>
-					
+
 				</form>
-				
-				<!-- External login -->
-				<div class="external-login">
-					<a href="#" class="facebook">
-						<i class="fa-facebook"></i>
-						Facebook Login
-					</a>
-					
-					<!-- 
-					<a href="#" class="twitter">
-						<i class="fa-twitter"></i>
-						Login with Twitter
-					</a>
-					
-					<a href="#" class="gplus">
-						<i class="fa-google-plus"></i>
-						Login with Google Plus
-					</a>
-					 -->
-				</div>
-				
+
+				<!-- External login --
+
 			</div>
 
 		</div>
-		
+
 	</div>
 	<!-- Bottom Scripts -->
 

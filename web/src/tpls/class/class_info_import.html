@@ -1,0 +1,92 @@
+
+<div class="page-title">
+
+    <div class="title-env">
+        <h1 class="title">DataTable</h1>
+        <p class="description">Dynamic table variants with pagination and other controls</p>
+    </div>
+
+    <div class="breadcrumb-env">
+
+        <ol class="breadcrumb bc-1">
+            <li>
+                <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+            </li>
+            <li>
+
+                <a href="tables-basic.html">Tables</a>
+            </li>
+            <li class="active">
+
+                <strong>Data Tables</strong>
+            </li>
+        </ol>
+
+    </div>
+
+</div>
+
+<!-- Basic Setup -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Basic Setup</h3>
+
+        <!--<div class="panel-options">-->
+            <!--<a class="fileupload" href="#" data-toggle="panel">-->
+                <!--<span class="collapse-icon">&ndash;</span>-->
+                <!--<span class="expand-icon">+</span>-->
+            <!--</a>-->
+            <!--<a class="fileupload" href="#" data-toggle="remove">-->
+                <!--&times;-->
+            <!--</a>-->
+        <!--</div>-->
+    </div>
+    <!--<form class="form-horizontal" name="form">-->
+        <!--<div class="form-line">-->
+            <!--<label>请选择证书文件：</label><span class="small-tip">证书文件只支持.pem格式，文件大小1M以内</span>-->
+            <!--<div class="choose-file-area">-->
+                <!--<input class="file-name" type="text" readonly="readonly" ng-model="fileItem.name"/>-->
+                <!--<a href="javascript:;" class="choose-book">-->
+                    <!--<input type="file" name="certificate" nv-file-select uploader="uploader" ng-click="clearItems()"/>浏览-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-line">-->
+            <!--<label>请选择私钥文件：</label><span class="small-tip">私钥文件只支持.key格式，文件大小1M以内</span>-->
+            <!--<div class="choose-file-area">-->
+                <!--<input class="file-name" type="text" readonly="readonly" ng-model="fileItem1.name"/>-->
+                <!--<a href="javascript:;" class="choose-key">-->
+                    <!--<input type="file" name="key" nv-file-select uploader="uploader1" ng-click="clearItems1()"/>浏览-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<button type="submit" ng-click="UploadFile()">提交</button>-->
+    <!--</form>-->
+
+    <div class="panel-body" style="height:auto!important;min-height: 360px;">
+        <form class="form-horizontal" name="form" style="height:200px;">
+        <div class="form-group" >
+            <label class="col-sm-2 control-label" for="field-4">File Field</label>
+
+            <div class="col-sm-10">
+                <input type="file" style="display:none;" class="form-control" id="field-4" nv-file-select uploader="uploader" onchange="angular.element(this).scope().fileChange(this);" ng-click="clearItems();">
+                <div>
+                    <input class="col-md-5" disabled type="text" placeholder="请选择文件" style="font-family:'楷体';height:30px;border:1px solid #CCCCCC; padding-left:10px;" ng-model="showFile.showFileString"/>
+                    <a class="btn btn-primary btn-sm" role="button" onclick="$('input[id=field-4]').click();">选择文件</a>
+                </div>
+            </div>
+            <br>
+
+        </div>
+            <div class="form-group">
+                <div class="col-sm-12 col-sm-offset-6">
+                    <button class="btn btn-primary btn-sm" type="submit" ng-click="UploadFile()">上传文件</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    </form>
+
+</div>

@@ -1,1 +1,6 @@
-[{"role":"教师","power":""}]
+{"total":4,"roleList":[
+  {"roleid":1,"rolename":"song","role":"学生","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
+  {"roleid":2,"rolename":"song","role":"学生","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
+  {"roleid":3,"rolename":"song1","role":"管理员","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
+  {"roleid":4,"rolename":"song1","role":"管理员","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"}
+]}

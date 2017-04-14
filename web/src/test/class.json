@@ -1,0 +1,14 @@
+{"total":4,"classList":[
+  {"classid":1,"classname":"一年一班","stuname":"小三","classmissnum":10,"classchecknum":101,"answernum":69,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":1,"classname":"一年一班","stuname":"小四","classmissnum":11,"classchecknum":111,"answernum":77,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":1,"classname":"一年一班","stuname":"小吴","classmissnum":9,"classchecknum":146,"answernum":88,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":1,"classname":"一年一班","stuname":"小刘","classmissnum":20,"classchecknum":77,"answernum":99,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小三","classmissnum":10,"classchecknum":101,"answernum":69,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小四","classmissnum":11,"classchecknum":111,"answernum":77,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小吴","classmissnum":9,"classchecknum":146,"answernum":88,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小刘","classmissnum":20,"classchecknum":77,"answernum":99,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小三","classmissnum":10,"classchecknum":101,"answernum":69,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":2,"classname":"一年二班","stuname":"小四","classmissnum":11,"classchecknum":111,"answernum":77,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":3,"classname":"一年三班","stuname":"小吴","classmissnum":9,"classchecknum":146,"answernum":88,"workscroe":90,"modifyteacher":"郑老师"},
+  {"classid":3,"classname":"一年三班","stuname":"小刘","classmissnum":20,"classchecknum":77,"answernum":99,"workscroe":90,"modifyteacher":"郑老师"}
+]}

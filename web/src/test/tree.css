@@ -1,0 +1,80 @@
+@charset "utf-8";
+.m-contest-footer {
+    padding: 20px 0;
+    height:70px;
+    text-align: right;
+    border-top: 1px solid #e8edf1;
+}
+.m-contest textarea{resize:none;}
+.m-contest em,.m-contest i,.m-contest dfn{font-style:normal;}
+.m-contest .z-w60{width:60px!important;}
+.m-contest .z-w100{width:100px!important;}
+.m-contest .z-inline-block input,.m-contest .z-inline-block select{display:inline-block;}
+.c-contest-bar{line-height:30px;color:#666;}
+.c-contest-bar .u-radio{padding-top:2px;}
+@charset "utf-8";
+/* html,body */
+html { font-size:1em;-webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-tap-highlight:rgba(0,0,0,0);-webkit-text-size-adjust:none;}
+body { font-size:0.75em;}
+label { cursor:pointer}
+a:link, a:visited { text-decoration:none}
+input,button,select,textarea{outline:none} textarea{resize:none;}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, blockquote, big, body, center, canvas, caption, cite, code, command, datalist, dd, del, details, dfn, dl, div, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, keygen, label, legend, li, meter, nav, menu, object, ol, output, p, pre, progress, q, s, samp, section, small, span, source, strike, strong, sub, sup, table, tbody, tfoot, thead, th, tr, tdvideo, tt,
+u, ul, var { margin:0; padding:0}
+
+article, aside, footer, header, hgroup, nav, section, figure, figcaption { display: block}
+
+h1, h2, h3, h4, h5, h6, th, td, table, input, button, select, textarea, sub{ font-size:1em}
+body, input, button, select, textarea, sub{ font-family:Arial, sans-serif}
+em, cite, address, optgroup { font-style:normal}
+kbd, samp, code { font-family:monospace}
+
+img, input, button, select, textarea { vertical-align:middle}
+ul, ol { list-style:none}
+img, fieldset { border:0}
+abbr, acronym { cursor:help; border-bottom:1px dotted black;border:0;font-variant:normal;}
+table {    width:100%; border-spacing:0; border:0}
+table th, table td { border:0}
+legend, hr { overflow:hidden; position:absolute; top:0; left:0}
+legend, hr, caption { visibility:hidden; font-size:0; width:0; height:0; line-height:0}
+input, select, textarea{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;-webkit-appearance:button;-moz-appearance:button;-o-appearance:button;-ms-appearance:button;border-radius:0px;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%;}
+:focus{outline:0;}
+a{text-decoration:none;outline:none;}
+textarea{resize:none;}
+i{font-style:initial;}
+div, h1, h2, p, table, tr, td{word-wrap:break-word;word-break:break-all;}
+.fix{display:inline-block;}
+.fix{display:block;}
+.fix:after{content:"";display:block;height:0px; clear:both;visibility:hidden;}
+div, h1, h2, p, table, tr, td{word-wrap:break-word;word-break:break-all;}
+.wbn{word-break:keep-all;white-space:nowrap;}
+.wby{word-break:break-all;word-wrap:break-word;white-space:normal;}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #999;}
+input:-moz-placeholder, textarea:-moz-placeholder {color: #999;}
+input::-moz-placeholder, textarea::-moz-placeholder {color: #999;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: #999;}
+html,body{min-height:100%;font-family:"microsoft yahei";}
+input::-ms-clear, ::-ms-reveal{display:none;}
+/*树结构*/
+.c-contest-tree-box{width:588px;padding:20px;border:1px solid #eaeaea;border-radius:2px;line-height:30px;font-size:14px;}
+.c-contest-tree-box .loading{width:100px;height:100px;padding-top:66px;background:url(../../images/contest/loading-img.png) no-repeat 50% 50%;position:absolute;top:80px;left:70px;}
+.c-contest-tree-box .tree div{outline:none;}
+.c-contest-tree-box .tree:nth-child(1){margin-right:36px;}
+.c-contest-tree-box .tree{float:left;width:254px;height:328px;box-shadow:1px 0 1px rgba(0,0,0,0.1);border:1px solid #d8dde6;border-radius:4px;overflow-y:scroll;position:relative;}
+.c-contest-menueTri-close,.c-contest-menueTri-open,.c-contest-menueTri-none{width:20px;height:20px;margin-top:5px;float:left;}
+.c-contest-menueTri-close{background:url(../../images/contest/tri-close.png) no-repeat 50% 50%;}
+.c-contest-menueTri-open{background:url(../../images/contest/tri-open.png) no-repeat 50% 50%;}
+.c-contest-menueTri-point{display:block;width:100%;height:100%;background:url(../../images/contest/tri-point.png) no-repeat 50% 50%;}
+.c-contest-menueTri.isleaf{background:none;}
+.c-contest-checkbox,.c-contest-checkbox-check,.c-contest-checkbox-have{width:16px;height:16px;border-radius:2px;float:left;margin:7px 5px 0 0;}
+.c-contest-checkbox{background:url(../../images/contest/nocheck.jpg) no-repeat 0 0;}
+.c-contest-checkbox-check{background:url(../../images/contest/check.jpg) no-repeat 0 0;}
+.c-contest-checkbox-have{background:url(../../images/contest/have.jpg) no-repeat 0 0;}
+.c-contest-tree-box ul{background:#fff;}
+.c-contest-tree-box ul ul{padding-left:12px;}
+.c-contest-tree-box ul li > div{margin-bottom:4px;}

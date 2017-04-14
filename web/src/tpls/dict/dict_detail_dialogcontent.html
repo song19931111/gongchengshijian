@@ -1,0 +1,58 @@
+<!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <!--form表单-->
+    <form class="form-horizontal" name ="myForm">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">名称</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="name" name="name" placeholder="名称"
+                       ng-model="item.name" required
+                       ng-maxlength="20" ng-minlength="4"
+                       ng-disabled="true"
+                >
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.name.$error" ng-show="myForm.name.$touched ||myForm.$submitted">
+                <label ng-message="required">名称不能为空</label>
+                <label ng-message="minlength">名称最小长度为4</label>
+                <label ng-message="maxlength">名称最大长度为20</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="englishName" class="col-sm-2 control-label">英文名称</label>
+            <div class="col-sm-6">
+                <input type="englishName" class="form-control" id="englishName" name="englishName" placeholder="英文名称"
+                       ng-model="item.englishName"  required
+                       ng-maxlength="20" ng-minlength="4" ng-disabled="true">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.englishName.$error" ng-show="myForm.englishName.$touched ||myForm.$submitted">
+                <label ng-message="required">英文名称不能为空</label>
+                <label ng-message="minlength">英文名称最小长度为4</label>
+                <label ng-message="maxlength">英文名称最大长度为20</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type" class="col-sm-2 control-label">类型</label>
+            <div class="col-sm-6">
+                <input type="type" class="form-control" id="type" name="type" placeholder="类型"
+                       ng-model="item.englishName"  required
+                       ng-maxlength="20" ng-minlength="4" ng-disabled="true">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.englishName.$error" ng-show="myForm.englishName.$touched ||myForm.$submitted">
+                <label ng-message="required">英文名称不能为空</label>
+                <label ng-message="minlength">英文名称最小长度为4</label>
+                <label ng-message="maxlength">英文名称最大长度为20</label>
+            </div>
+        </div>
+
+</div>
+</form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

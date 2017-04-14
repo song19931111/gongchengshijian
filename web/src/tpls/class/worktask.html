@@ -1,0 +1,27 @@
+<!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <!--form表单-->
+    <form class="form-horizontal" name ="myForm">
+
+
+        <div class="form-group">
+            <label for="workdate" class="col-sm-2 control-label">作业日期</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="workdate" name="workdate" placeholder="作业日期"
+                       ng-model="item.workdate" required>
+                <textarea title="#我是默认标题#" placeholder="我是placeholder" ng-model="item.content" ng-change="log()"></textarea>
+            </div>
+            <div class="col-sm-2" ng-messages="myForm.workscroe.$error" ng-show="myForm.workscroe.$touched ||myForm.$submitted">
+                <label ng-message="required">作业分不能为空</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

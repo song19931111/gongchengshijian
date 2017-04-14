@@ -1,0 +1,9 @@
+<div>
+    <div ng-click="switchOper(data)" ng-class="{'c-contest-menueTri-close':!data.isOpen,'c-contest-menueTri-open':data.isOpen}" ng-show="!data.isLeaf"></div>
+    <div class="c-contest-menueTri-none" ng-show="data.isLeaf"><i class="c-contest-menueTri-point" ng-show="data.isChecked=='none'"></i></div>
+    <div ng-click="change(data)" ng-class="{'c-contest-checkbox':data.isChecked==0,'c-contest-checkbox-check':data.isChecked==1,'c-contest-checkbox-have':data.isChecked==2}"><span></span></div>
+    <span>{{data.name}}</span>
+</div>
+<ul ng-show="data.isOpen">
+    <li ng-show="data.isChecked==1||data.isChecked==2" ng-repeat="data in data.child" ng-include="'tree_item_renderer2.html'"></li>
+</ul>

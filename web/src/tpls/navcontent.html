@@ -1,0 +1,20 @@
+<!--<li>-->
+    <!--<a ui-sref="{{menu.url}}">-->
+        <!--<i class="linecons-cog"></i>-->
+        <!--<span class="title">{{menu.menuname}}</span>-->
+    <!--</a>-->
+    <!--<ul ng-if="menu.children == null" ng-include="'tpls/navcontent.html'" ng-repeat="menu in menu.children">-->
+    <!--</ul>-->
+<!--</li>-->
+
+
+<a  ui-sref="{{menu.url}}">
+    <i class="linecons-cog"></i>
+    <span class="title">{{menu.menuname}}</span>
+</a>
+<ul id="main-menu" class="main-menu" ng-if="menu.children.length>0">
+    <li  ng-repeat="menu in menu.children"  ng-include="'tpls/navcontent.html'">
+
+    </li>
+
+</ul>

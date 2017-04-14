@@ -1,43 +1,64 @@
 <!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
 <div class="modal-header">
-    <h3 class="modal-title">修改数据</h3>
+    <h3 class="modal-title">{{title}}</h3>
 </div>
 <div class="modal-body">
     <!--form表单-->
-    <form class="form-horizontal">
+    <form class="form-horizontal" name ="myForm">
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <input type="email" class="form-control" id="username" name="username" placeholder="用户名"
-                       ng-model="item.username">
+                       ng-model="item.username" required user-unique url="test/username.json"
+                       ng-maxlength="20" ng-minlength="4"
+                >
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.username.$error" ng-show="myForm.username.$touched ||myForm.$submitted">
+                <label ng-message="required">用户名不能为空</label>
+                <label ng-message="minlength">用户名最小长度为4</label>
+                <label ng-message="maxlength">用户名最大长度为20</label>
+                <label ng-message="userUnique">用户名不唯一</label>
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-2 control-label">密码</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
                 <input type="password" class="form-control" id="password" name="password" placeholder="密码"
-                       ng-model="item.password">
+                       ng-model="item.password" required>
+            </div>
+            <div class="col-sm-2" ng-messages="myForm.password.$error" ng-show="myForm.password.$touched ||myForm.$submitted">
+                <label ng-message="required">密码不能为空</label>
             </div>
         </div>
         <div class="form-group">
             <label for="tel" class="col-sm-2 control-label">手机号</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="tel" name="tel" placeholder="手机号" ng-model="item.tel">
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="tel" name="tel" placeholder="手机号"
+                       ng-model="item.tel" ng-pattern="/^1[3|5|7|8]\d{9}$/">
+            </div>
+            <div class="col-sm-2" ng-messages="myForm.tel.$error" ng-show="myForm.tel.$touched ||myForm.$submitted">
+                <label ng-message="pattern">手机格式不正确</label>
             </div>
         </div>
         <div class="form-group">
             <label for="mail" class="col-sm-2 control-label">邮箱</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="mail" name="mail" placeholder="邮箱" ng-model="item.mail">
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="mail" name="mail" placeholder="邮箱" ng-model="item.mail"    ng-minlength="10" ng-maxlength="50">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.mail.$error" ng-show="myForm.mail.$touched ||myForm.$submitted">
+                <label ng-message="required">邮箱不能为空</label>
+                <label ng-message="minlength">邮箱最小长度为10</label>
+                <label ng-message="maxlength">邮箱最小长度为50</label>
+                <label ng-message="email">EMail格式不正确</label>
             </div>
         </div>
-        <!--<div class="form-group">-->
-            <!--<label for="mail" class="col-sm-2 control-label">角色</label>-->
-            <!--<div class="col-sm-10">-->
-                <!--<select class="form-control" ng-model="item.role" ng-options="item.rolelist">-->
-                <!--</select>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="form-group">
+            <label for="mail" class="col-sm-2 control-label">角色</label>
+            <div class="col-sm-6">
+                <select class="form-control" ng-model="item.role" ng-options="item.rolelist">
+                </select>
+            </div>
+        </div>
     </form>
 </div>
 <div class="modal-footer">

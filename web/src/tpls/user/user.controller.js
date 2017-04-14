@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular.module('mainApp')
-        .controller('UserCtrl',['$scope','userAjaxService','$uibModal',function ($scope,userAjaxService,$uibModal) {
+        .controller('UserCtrl',['$scope','userAjaxService','$uibModal','$state' ,function ($scope,userAjaxService,$uibModal,$state) {
             var GetAllUser = function () {
 
                 var postData = {
@@ -62,6 +62,16 @@
                    }
 
             ///////////////////////////////////////复选框End//////////////////////////////////////////////
+
+
+            ///////////////////////////////////////设置权限//////////////////////////////////////////////
+
+            $scope.setPower = function (userid) {
+
+                $state.go('base.index.power',{id:userid,isUser:true});
+
+            }
+
 
             ///////////////////////////////////////新增用户//////////////////////////////////////////////
             $scope.add = function (item) {
@@ -130,8 +140,10 @@
 //这是模态框的控制器,记住$uibModalInstance这个是用来调用函数将模态框内的数据传到外层控制器中的,items则上面所说的入参函数,它可以获取到外层主控制器的参数
         $scope.item = items;//这里就可以去外层主控制器的数据了
             if($scope.item == 'none'){
+                $scope.title = "新增用户";
                 $scope.item = {"username":"","tel":'',"mail":"","type":"add"};
             }else{
+                $scope.title = "修改用户";
                 $scope.item['type'] ="modify";
             }
 

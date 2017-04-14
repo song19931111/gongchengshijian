@@ -1,0 +1,65 @@
+<!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <!--form表单-->
+    <form class="form-horizontal" name ="myForm">
+        <div class="form-group">
+            <label for="school" class="col-sm-2 control-label">学校</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="school" name="school" placeholder="学校"
+                       ng-model="item.school" required
+                       ng-maxlength="40" ng-minlength="4"
+                >
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.school.$error" ng-show="myForm.school.$touched ||myForm.$submitted">
+                <label ng-message="required">学校名不能为空</label>
+                <label ng-message="minlength">学校名最小长度为4</label>
+                <label ng-message="maxlength">学校名最大长度为40</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="college" class="col-sm-2 control-label">学院</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="college" name="college" placeholder="学院"
+                       ng-model="item.college" required
+                       ng-maxlength="40" ng-minlength="4">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.college.$error" ng-show="myForm.college.$touched ||myForm.$submitted">
+                <label ng-message="required">学院名不能为空</label>
+                <label ng-message="minlength">学校名最小长度为4</label>
+                <label ng-message="maxlength">学校名最大长度为40</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="faculty" class="col-sm-2 control-label">系</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="faculty" name="faculty" placeholder="系"
+                       ng-model="item.faculty"
+                       ng-maxlength="20" ng-minlength="2">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.faculty.$error" ng-show="myForm.faculty.$touched ||myForm.$submitted">
+                <label ng-message="minlength">系最小长度为2</label>
+                <label ng-message="maxlength">系最大长度为20</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="profession" class="col-sm-2 control-label">专业</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="profession" name="profession" placeholder="专业"
+                       ng-model="item.profession"
+                       ng-maxlength="20" ng-minlength="2">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.profession.$error" ng-show="myForm.profession.$touched ||myForm.$submitted">
+                <label ng-message="minlength">专业最小长度为2</label>
+                <label ng-message="maxlength">专业名最大长度为20</label>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

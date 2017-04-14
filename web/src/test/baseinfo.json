@@ -1,0 +1,9 @@
+{"total":5,
+"baseinfo": [
+{"id": 1, "school": "福州大学", "college": "数学与计算机学院", "faculty":"计算机","profession": "计算机技术1"},
+{"id": 2, "school": "福州大学", "college": "数学与计算机学院", "faculty":"计算机","profession": "计算机技术2"},
+{"id": 3, "school": "福州大学", "college": "数学与计算机学院", "faculty":"计算机","profession": "计算机技术3"},
+{"id": 4, "school": "福州大学", "college": "数学与计算机学院", "faculty":"计算机","profession": "计算机技术4"},
+{"id": 5, "school": "福州大学", "college": "数学与计算机学院", "faculty":"计算机","profession": "计算机技术5"}
+
+]}

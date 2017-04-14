@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="tree.js"></script>
+    <link rel="stylesheet" href="tree.css">
+</head>
+
+<body ng-app="myApp" ng-controller="TreeController">
+
+<div class="c-group-r" style="background:#fff;">
+    <div class="c-contest-tree-box fix">
+        <div class="tree">
+            <ul>
+                <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+            </ul>
+            <div class="loading" ng-show="loadingSwitch">正在加载请稍等</div>
+        </div>
+        <div class="tree">
+            <ul>
+                <li ng-show="data.isChecked==1||data.isChecked==2" ng-repeat="data in tree" ng-include="'tree_item_renderer2.html'"></li>
+            </ul>
+            <div class="loading" ng-show="loadingSwitch">正在加载请稍等</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
