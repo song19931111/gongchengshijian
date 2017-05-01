@@ -109,7 +109,7 @@
                 //这里很关键,是打开模态框的过程
                 var modalInstance = $uibModal.open({
                     animation: $scope.animationsEnabled,//打开时的动画开关
-                    templateUrl: 'tpls/user/dialogcontent.html',//模态框的页面内容,这里的url是可以自己定义的,也就意味着什么都可以写
+                    templateUrl: 'tpls/dict/dict_detail_dialogcontent.html',//模态框的页面内容,这里的url是可以自己定义的,也就意味着什么都可以写
                     controller: 'ModalInstanceCtrl',//这是模态框的控制器,是用来控制模态框的
                     size: size,//模态框的大小尺寸
                     resolve: {//这是一个入参,这个很重要,它可以把主控制器中的参数传到模态框控制器中

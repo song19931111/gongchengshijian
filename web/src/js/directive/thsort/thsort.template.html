@@ -1,0 +1,13 @@
+<tr>
+    <td>
+    </td>
+    <td ng-repeat="item in theadOptions.columns" style="cursor: pointer;" ng-click="toggle(item)">
+    {{item.thName}}
+    <i class="fa"  ng-if="item.sort" ng-class="{'fa-sort':item.column!= theadOptions.orderBy,
+    'fa-sort-desc':item.column == theadOptions.orderBy && theadOptions.asc ==false,
+    'fa-sort-asc':item.column == theadOptions.orderBy && theadOptions.asc
+    }">
+    </i>
+    </td>
+    <td>操作</td>
+</tr>

@@ -38,13 +38,26 @@
             <label for="type" class="col-sm-2 control-label">类型</label>
             <div class="col-sm-6">
                 <input type="type" class="form-control" id="type" name="type" placeholder="类型"
-                       ng-model="item.englishName"  required
-                       ng-maxlength="20" ng-minlength="4" ng-disabled="true">
+                       ng-model="item.type"  required
+                       ng-maxlength="10" ng-minlength="4">
             </div>
-            <div class="col-sm-4" ng-messages="myForm.englishName.$error" ng-show="myForm.englishName.$touched ||myForm.$submitted">
-                <label ng-message="required">英文名称不能为空</label>
-                <label ng-message="minlength">英文名称最小长度为4</label>
-                <label ng-message="maxlength">英文名称最大长度为20</label>
+            <div class="col-sm-4" ng-messages="myForm.englishName.$error" ng-show="myForm.type.$touched ||myForm.$submitted">
+                <label ng-message="required">类型不能为空</label>
+                <label ng-message="minlength">类型最小长度为4</label>
+                <label ng-message="maxlength">类型最大长度为10</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type" class="col-sm-2 control-label">值</label>
+            <div class="col-sm-6">
+                <input type="type" class="form-control" id="value" name="value" placeholder="值"
+                       ng-model="item.value"  required
+                       ng-maxlength="40" ng-minlength="4">
+            </div>
+            <div class="col-sm-4" ng-messages="myForm.value.$error" ng-show="myForm.value.$touched ||myForm.$submitted">
+                <label ng-message="required">类型不能为空</label>
+                <label ng-message="minlength">类型最小长度为4</label>
+                <label ng-message="maxlength">类型最大长度为40</label>
             </div>
         </div>
 

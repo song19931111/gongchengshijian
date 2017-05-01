@@ -3,7 +3,7 @@
  */
 var mainApp = angular.module('mainApp',['ui.router','ngMessages','tm.pagination','ngAnimate','ui.bootstrap','toastr','chart.js',
 
-'angularFileUpload'/*'ngFileUpload'*/]);
+'angularFileUpload','mainApp.directive'/*'ngFileUpload'*/]);
 mainApp.config(function ($stateProvider,$urlRouterProvider) {
 
     $stateProvider

@@ -14,20 +14,20 @@ var paths = {
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src(paths.sass)
     .pipe(sass())
     .on('error', sass.logError)
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(rename({ extreme: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
 
 gulp.task('watch', ['sass'], function() {
-  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.sass, ['sass','concat']);
 });
 
 gulp.task('install', ['git-check'], function() {
@@ -36,6 +36,14 @@ gulp.task('install', ['git-check'], function() {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
+
+gulp.task('concat', function() {
+  gulp.src(['./www/css/**/*.css'])
+    .pipe(concat('mycss.min.css'))
+    .pipe(minifyCss())
+    .pipe(gulp.dest('./www/css'))
+});
+
 
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {

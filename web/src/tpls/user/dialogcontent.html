@@ -55,7 +55,7 @@
         <div class="form-group">
             <label for="mail" class="col-sm-2 control-label">角色</label>
             <div class="col-sm-6">
-                <select class="form-control" ng-model="item.role" ng-options="item.rolelist">
+                <select class="form-control" ng-model="item.role" ng-options="role for role in rolelist">
                 </select>
             </div>
         </div>
