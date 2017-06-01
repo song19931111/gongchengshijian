@@ -8,14 +8,14 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">名称</label>
             <div class="col-sm-6">
-                <input type="email" class="form-control" id="name" name="name" placeholder="名称"
+                <input type="text" class="form-control" id="name" name="name" placeholder="名称"
                        ng-model="item.name" required
-                       ng-maxlength="20" ng-minlength="4"
+                       ng-maxlength="20" ng-minlength="2"
                 >
             </div>
             <div class="col-sm-4" ng-messages="myForm.name.$error" ng-show="myForm.name.$touched ||myForm.$submitted">
                 <label ng-message="required">名称不能为空</label>
-                <label ng-message="minlength">名称最小长度为4</label>
+                <label ng-message="minlength">名称最小长度为2</label>
                 <label ng-message="maxlength">名称最大长度为20</label>
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group">
             <label for="englishName" class="col-sm-2 control-label">英文名称</label>
             <div class="col-sm-6">
-                <input type="englishName" class="form-control" id="englishName" name="englishName" placeholder="英文名称"
+                <input type="text" class="form-control" id="englishName" name="englishName" placeholder="英文名称"
                        ng-model="item.englishName"  required
                        ng-maxlength="20" ng-minlength="4">
             </div>
@@ -47,8 +47,34 @@
                 <label ng-message="maxlength">描述最大长度为100</label>
             </div>
         </div>
+        <div class="form-group">
+            <label for="des" class="col-sm-2 control-label">是否内置</label>
+            <div class="col-sm-1">
+                <input type="radio"  style="margin-top:10px;" name="isSystem"  ng-value="1" ng-checked="item.isSystem == 1" ng-model="item.isSystem">是
 
-</div>
+            </div>
+            <div class="col-sm-1">
+                <input type="radio" style="margin-top:10px;" name="isSystem" ng-value="0" ng-checked="item.isSystem == 0"  ng-model="item.isSystem">否
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-1">
+            <button class="btn btn-primary" ng-click="addDictItem();" ng-if="item.type=='add'">新增</button>
+            </div>
+        </div>
+        <div class="form-group" ng-repeat="dictItem in dictList">
+
+                    <label class="col-sm-2 control-label">新增项</label>
+                    <div class="col-sm-4">
+                        <input type="text"  id="newItem{{$index}}"  name="newItem{{$index}}" class="form-control" placeholder="新增项" ng-model="dictItem.value"
+                               ng-maxlength="20" ng-minlength="2">
+                    </div>
+                <div class="col-sm-4" ng-messages="myForm['newItem'+$index].$error" ng-show="myForm['newItem'+$index].$touched ||myForm.$submitted">
+                    <label ng-message="minlength">新增项最小长度为2</label>
+                    <label ng-message="maxlength">新增项最大长度为20</label>
+                </div>
+        </div>
+
     </form>
 </div>
 <div class="modal-footer">

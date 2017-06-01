@@ -46,9 +46,9 @@
             <div class="row">
                 <div class="col-sm-4">
                     <button class="btn btn-sm btn-primary"  ng-click="open('lg','none')">
-                        <i class="fa fa-plus fa-lg"></i>新增数据项</button>
+                        <i class="fa fa-plus fa-lg">新增数据项</i></button>
                     <button class="btn btn-sm btn-danger" ng-click="delete()">
-                        <i class="fa fa-trash-o fa-lg" ></i>删除</button>
+                        <i class="fa fa-trash-o fa-lg" >删除</i></button>
                 </div>
             </div>
             <div class="row">
@@ -83,18 +83,27 @@
                 <tbody>
                 <tr ng-repeat="dict in dictList">
                     <td>
-                        <input type="checkbox" name="{{user.userid}}" class="cbr cbr-primary" ng-checked="isSelected(user.userid)" ng-click="updateSelection($event,user.userid);"/>
+                        <input type="checkbox" name="{{dict.id}}" class="cbr-primary" ng-checked="isSelected(dict.id)" ng-click="updateSelection($event,dict.id);"/>
                     </td>
                     <td ng-show="false">dict.id</td>
                     <td>{{dict.name}}</td>
                     <td>{{dict.englishName}}</td>
                     <td>{{dict.des}}</td>
-                    <td>{{user.createpeople}}</td>
-                    <td>{{user.createtime}}</td>
-                    <td>{{user.modifypeople}}</td>
-                    <td>{{user.modifytime}}</td>
+                    <td>{{dict.createpeople}}</td>
+                    <td>{{dict.createtime}}</td>
+                    <td>{{dict.modifypeople}}</td>
+                    <td>{{dict.modifytime}}</td>
                     <td>
-                        <a  class="fa fa-sun-o" ng-click="open('lg',base)"></a>
+                        <div class="dropdown">
+                            <a  class="fa fa-sun-o  dropdown-toggle" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="open('lg',dict);">修改数据项</a></li>
+                                <li><a ng-click="goDictDetail(dict);">查看详细</a></li>
+
+                            </ul>
+
+                        </div>
+
                     </td>
                 </tr>
                 </tbody>

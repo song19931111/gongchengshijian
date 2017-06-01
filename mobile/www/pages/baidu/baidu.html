@@ -1,0 +1,23 @@
+<ion-view view-title="百度插件定位">
+  <ion-content class="padding">
+    <button class="button button-block button-positive icon-left "
+            ng-click="tirarFoto()">
+      获取地理定位
+    </button>
+
+    </br></br>
+
+
+    <p>定位数据</p></br></br>
+    {{data}}
+    <p>数据2</p>
+    {{team}}</br></br>
+    <div id="allmap"></div>
+    <div id="r-result">
+      经度: <input id="longitude" type="text" style="width:100px; margin-right:10px;" />
+      纬度: <input id="latitude" type="text" style="width:100px; margin-right:10px;" />
+      <input type="button" value="查询" onclick="theLocation()" />
+    </div>
+
+  </ion-content>
+</ion-view>

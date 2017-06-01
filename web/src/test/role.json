@@ -1,6 +1,59 @@
 {"total":4,"roleList":[
-  {"roleid":1,"rolename":"song","role":"学生","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
-  {"roleid":2,"rolename":"song","role":"学生","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
-  {"roleid":3,"rolename":"song1","role":"管理员","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"},
-  {"roleid":4,"rolename":"song1","role":"管理员","creatclass":"有权限","mangeclass":"有权限","mangestu":"有权限","modifypeople":"ccc","modifytime":"2017-4-3"}
+  {
+    "roleId":1,
+    "roleName":"管理员",
+    "addPower":[1,2,3,4,5,6,7],
+    "deletePower":[1,2,3,4,5,6,7],
+    "modifyPower":[1,2,3,4,5,6,7],
+    "selectPower":[1,2,3,4,5,6,7],
+    "menuPower":[1,2,3,4,5],
+    "createPeople":"song",
+    "createTime":"2017-5-10",
+    "modifyTPeople":"ccc",
+    "modifyTime":"2017-4-3"
+
+  },
+  {
+    "roleId":2,
+    "roleName":"普通用户",
+    "addPower":[1,2,3,4,5,6,7],
+    "deletePower":[1,2,3,4,5,6,7,9],
+    "modifyPower":[1,2,3,4,5,6,7],
+    "selectPower":[1,2,3,4,5,6,7],
+    "menuPower":[1,2,3,4,5],
+    "createPeople":"song",
+    "createTime":"2017-5-10",
+    "modifyTPeople":"ccc",
+    "modifyTime":"2017-4-3"
+
+  },
+  {
+    "roleId":3,
+    "roleName":"普通用户1",
+    "addPower":[1,2,3,4,5,6,7],
+    "deletePower":[1,2,3,4,5,6,7,8],
+    "modifyPower":[1,2,3,4,5,6,7,9],
+    "selectPower":[1,2,3,4,5,6,7,8],
+    "menuPower":[1,2,3,4,5,6,7,8,9,10],
+    "createPeople":"song",
+    "createTime":"2017-5-10",
+    "modifyTPeople":"ccc",
+    "modifyTime":"2017-4-3"
+
+  },
+  {
+    "roleId":4,
+    "roleName":"普通用户2",
+    "addPower":[1,2,3,4,5,6,7],
+    "deletePower":[1,2,3,4,5,6,7,8,12],
+    "modifyPower":[1,2,3,4,5,6,7,9,13],
+    "selectPower":[1,2,3,4,5,6,7,8,11],
+    "menuPower":[1,2,3,4,5],
+    "createPeople":"song",
+    "createTime":"2017-5-10",
+    "modifyTPeople":"ccc",
+    "modifyTime":"2017-4-3"
+
+  }
+
 ]}

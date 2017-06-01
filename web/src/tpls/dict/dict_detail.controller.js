@@ -10,7 +10,8 @@
 (function () {
     'use strict';
     angular.module('mainApp')
-        .controller('dictDetailCtrl',['$scope','userAjaxService','$uibModal','$state' ,function ($scope,userAjaxService,$uibModal,$state) {
+        .controller('dictDetailCtrl',['$scope','dictAjaxService','$uibModal','$state','$stateParams',function ($scope,dictAjaxService,$uibModal,$state,$stateParams) {
+            $scope.id =  $stateParams.id;
             var GetAllUser = function () {
 
                 var postData = {
@@ -18,21 +19,19 @@
                     pageSize: $scope.paginationConf.itemsPerPage
                 }
                 //获取所有的用户
-                userAjaxService.getList($scope.currentPage).then(function (result) {
+                dictAjaxService.getDetailList($scope.currentPage,$scope.paginationConf.itemsPerPage,id).then(function (result) {
                     console.log(result);
                     console.log(result.data.total);
                     $scope.paginationConf.totalItems = result.data.total;
-                    $scope.userList = result.data.userList;
+                    $scope.dictDetailList = result.data.dictDetailList;
                 }).catch(function (data) {
                     console.log('error');
                 });
-
-
             }
             //配置分页基本参数
             $scope.paginationConf = {
                 currentPage: 1,
-                totalItems: 8000,
+                totalItems: 1,
                 itemsPerPage: 15,
                 pagesLength: 15,
                 perPageOptions: [10, 20, 30, 40, 50]

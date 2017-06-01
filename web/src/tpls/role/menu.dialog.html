@@ -1,0 +1,13 @@
+<!-- 这里就是控制器的内容 ,然后直接在控制器里面插入modal的页面元素-->
+<div class="modal-header">
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div class="modal-body">
+    <!--form表单-->
+    <div  id="jsTree"  js-tree="treeConfig" ng-model="model.jsTreeData" tree="treeInstance"  tree-events="create_node:createNodeCB" ></div>
+</div>
+<div class="modal-footer" >
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+

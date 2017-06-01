@@ -1,0 +1,40 @@
+<ion-header-bar class="bar-energized">
+  <h1 class="title">学生注册</h1>
+</ion-header-bar>
+<ion-content class="has-header login-page">
+  <form name="myForm">
+  <div class="list list-item">
+    <label class="item item-input"
+    >
+      <input type="text" placeholder="手机号" name="tel" ng-model="user.tel" required ng-pattern="/^1[34578]\d{9}$/">
+    </label>
+
+    <label class="item item-input" style="margin-top: 20px;";>
+      <input type="password"  placeholder="密码" ng-model="user.password">
+    </label>
+    <!--<div class="row">-->
+    <!--<label class="item item-input item-button-right col col-75" style="margin-top: 20px;";>-->
+    <!--<input type="password" placeholder="密码" ng-model="user.password" style="float:left;">-->
+    <!--</label>-->
+    <!--<div class="col col-30">-->
+    <!--<button class=" col  button button-energized" style="float:left;" ng-click="login()">登陆</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="item item-input" style="margin-top: 20px;">
+      <input type="text" placeholder="验证码" />
+      <button class="button button-positive button-small" ng-disabled="isButtonDisable" ng-click="sendCode()">{{codetime}}</button>
+    </div>
+  </div>
+  </form>
+  <button class="button button-block login-btn" ui-sref="register2">下一步</button>
+  <div class="toast-container active">
+    <div class="toast-message" ng-messages="myForm.tel.$error" ng-show="myForm.tel.$touched ||myForm.$submitted">
+      <div ng-message="required">手机号不能为空</div>
+      <div ng-message="pattern">手机号格式不正确</div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+  <!--<div><pre>{{myForm.tel.$error}}</pre></div>-->

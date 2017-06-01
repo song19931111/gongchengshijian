@@ -1,0 +1,63 @@
+<ion-view view-title="首页">
+  <div class="avatar-section">
+    <div>
+      <a class="logo" ng-click="$state.go('tab.profile')"
+         style="background: url(img/b7.jpg) center no-repeat; background-size: cover">
+      </a>
+      <div class="avatar-wrap">
+        <p><img class="avatar" src="pages/home/img/user.png" alt=""></p>
+        <p  class="user">宋祥</p>
+      </div>
+      <div class="social-btns">
+          <strong></strong>同学
+      </div>
+    </div>
+    <!--<div>-->
+      <!--<a-->
+        <!--class="logo"-->
+        <!--style="background: url(img/b7.jpg) center no-repeat; background-size: cover">-->
+      <!--</a>-->
+      <!--<div class="avatar-wrap">-->
+        <!--<p><img class="avatar" src="pages/home/img/user.png"></p>-->
+        <!--<p class="login-btn">登陆</p>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  </div>
+  <ion-content  style="top:250px">
+
+    <div class="row light-bg quick-actions row-no-padding">
+      <a class="col col-border tab-item quick-action-item" ui-sref="app.product">
+        <img src="pages/home/img/sign.png"  class="icon ion-alert-circled"/>签到
+      </a>
+      <a class="col col-border tab-item quick-action-item" href="">
+        <img src="pages/home/img/sign.png" class="icon ion-alert-circled"/>查看签到情况
+      </a>
+      <a class="col col-border tab-item quick-action-item" href="">
+        <img src="pages/home/img/sign.png" class="icon ion-alert-circled"/>查看选课情况
+      </a>
+    </div>
+    <!--<ion-list>-->
+      <!--<div class="button-bar bar-light icon-top">-->
+        <!--<button class="button button-icon" ng-click="$state.go('tab.cart')">-->
+          <!--<i class="icon ion-ios-cart"></i>-->
+          <!--购物车-->
+        <!--</button>-->
+        <!--<button class="button button-icon" ng-click="$state.go('tab.orders')">-->
+          <!--<i class="icon ion-ios-paper-outline"></i>-->
+          <!--订单-->
+        <!--</button>-->
+        <!--<button class="button button-icon" ng-click="$state.go('tab.coupons')">-->
+          <!--<i class="icon ion-ios-pricetags"></i>-->
+          <!--折扣券-->
+        <!--</button>-->
+      <!--</div>-->
+
+      <!--<div class="item item-divider"></div>-->
+
+
+    <!--</ion-list>-->
+  </ion-content>
+  <ion-footer-bar class="bar bar-footer bar-stable">
+  </ion-footer-bar>
+</ion-view>

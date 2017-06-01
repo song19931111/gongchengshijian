@@ -1,1 +1,66 @@
 /* Empty. Add your own CSS if you like */
+#allmap {height:400px;}
+.box{text-align:center; font-szie:18px;}
+.box img {width:100%;}
+/* Empty. Add your own CSS if you like */
+.image-title{
+  height:33%;
+}
+.col-border{
+  border:solid 1px #ececec;
+  border-right-style: none;
+  border-bottom-style: none;
+}
+.col-border :last-child{
+  border-right:solid 1px #ececec;
+}
+.row:last-child .col-border{
+  border-bottom: solid 1px #ececec;
+}
+.quick-actions{
+  display:table;
+}
+.quick-action-item{
+  width:50vw;
+  height:50vw;
+  display:table-cell;
+  vertical-align: middle;
+}
+.item-active{
+  background-color: #fff;
+  border-left-color: #ff6a3c;
+  border-left-width:4px;
+  border-left-style:solid;
+}
+.card-image{
+  width: 50px;
+  height:25px;
+}
+/*.toast*/
+/*{*/
+  /*position: fixed;*/
+  /*top: 200px;*/
+  /*left: 50%;*/
+  /*width: 200px;*/
+  /*margin-left: -100px;*/
+  /*border: 1px solid #666;*/
+  /*background-color: #B1BCCF;*/
+  /*padding: 10px 0 ;*/
+  /*text-align:center;*/
+  /*opacity: .9;*/
+
+  /*-webkit-transition: opacity 0.5s ease-out ;*/
+  /*-moz-transition: opacity 0.5s ease-out;*/
+  /*-ms-transition: opacity 0.5s ease-out;*/
+  /*-o-transition: opacity 0.5s ease-out;*/
+  /*transition: opacity 0.5s ease-out;*/
+/*<!--*/
+  /*!*The good stuff *!*/
+/*-webkit-transition: opacity 0.5s ease-out; !* Saf3.2+, Chrome *!*/
+/*-moz-transition: opacity 0.5s ease-out; !* FF4+ *!*/
+/*-ms-transition: opacity 0.5s ease-out; !* IE10? *!*/
+/*-o-transition: opacity 0.5s ease-out; !* Opera 10.5+ *!*/
+/*transition: opacity 0.5s ease-out;*/
+
+/*-->*/
+/*}*/

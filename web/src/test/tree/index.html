@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../lib/jstree/dist/themes/default/style.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+            }
+        </style>
+    </head>
+    <body ng-app="ngJsTreeDemo" ng-controller="treeCtrl">
+
+    <div id="jsTree" js-tree="treeConfig" ng-model="model.jsTreeData" tree="treeInstance">
+
+    </div>
+        <script src="../../lib/jquery/dist/jquery.min.js"></script>
+        <script src="../../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../lib/angular/angular.min.js"></script>
+        <!--<script src="../../lib/angular-animate/angular-animate.min.js"></script>-->
+        <script src="../../lib/jstree/dist/jstree.js"></script>
+        <script src="../../lib/ng-js-tree/dist/ngJsTree.js"></script>
+        <script src="app.js"></script>
+        <script src="treeCtrl.js"></script>
+    </body>
+</html>

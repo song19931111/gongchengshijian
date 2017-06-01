@@ -6,7 +6,7 @@
 
         <ion-slide ng-repeat="item in slides">
 
-          <div class="content" ng-if="$index == slideIndex">
+          <div class="content" ng-if="$index == slideIndex" style="margin-left:10%">
             <span class="top"><h2>{{ item.top }}</h2></span>
 
             <div class="phone {{ device }}">
@@ -17,17 +17,17 @@
         </ion-slide>
 
         <ion-slide>
-          <div class="content" ng-if="slides.length == slideIndex">
+          <div class="content" ng-if="slides.length == slideIndex" >
 
             <div class="last">
               <div class="logo2 step1">
-                <img src="img/icon.jpg">
+                <img src="pages/welcome/img/logo.png">
                 <span class="icon2-logo"></span>
               </div>
 
               <p>校园签到</p>
 
-              <button class="button button-block button-clear step2" ui-sref="tab.explore" ng-click="goHome()">开始</button>
+              <button class="button button-block button-clear step2" ng-click="goHome()">开始</button>
             </div>
 
           </div>

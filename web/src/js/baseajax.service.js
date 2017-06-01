@@ -11,7 +11,6 @@ angular.module('mainApp')
         var service ={};
         service.moduleName = '';
         service.getList = function (index) {
-            console.log("getlist fun called");
             console.log(DOMAIN + this.moduleName);
             return $http({
                 method:'GET'
@@ -34,6 +33,32 @@ angular.module('mainApp')
                 ,url:DOMAIN + this.moduleName
                 ,params:{
                     id:id
+                }
+            });
+        };
+        service.add = function (data) {
+            return $http({
+                method:'POST'
+                ,url:DOMAIN + this.moduleName+"/add"
+                ,
+                data:angular.toJson(data)
+            });
+        };
+        service.modify = function (data) {
+            return $http({
+                method:'POST'
+                ,url:DOMAIN + this.moduleName+"/modify"
+                ,params:{
+                    data:data
+                }
+            });
+        };
+        service.delete = function (ids) {
+            return $http({
+                method:'POST'
+                ,url:DOMAIN + this.moduleName+"/modify"
+                ,params:{
+                    ids:ids
                 }
             });
         };

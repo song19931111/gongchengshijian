@@ -1,9 +1,10 @@
 /**
  * Created by xiangsong on 2017/4/2.
  */
-var mainApp = angular.module('mainApp',['ui.router','ngMessages','tm.pagination','ngAnimate','ui.bootstrap','toastr','chart.js',
+var mainApp = angular.module('mainApp',['ui.router','ngMessages','ngJsTree','tm.pagination','ngAnimate','ui.bootstrap','toastr','chart.js',
 
-'angularFileUpload','mainApp.directive'/*'ngFileUpload'*/]);
+'angularFileUpload','mainApp.directive','ngBootbox'/*'ngFileUpload'*/]);
+
 mainApp.config(function ($stateProvider,$urlRouterProvider) {
 
     $stateProvider
@@ -86,6 +87,7 @@ mainApp.config(function ($stateProvider,$urlRouterProvider) {
     })
         .state('base.index.dict_detail', {
             url: '/dict_detail',
+            params:{id:null},
             views: {
                 'content@base': {
                     templateUrl: 'tpls/dict/dict_detail.html',
@@ -166,6 +168,59 @@ mainApp.config(function ($stateProvider,$urlRouterProvider) {
 
             }
         })
+        .state('error', {
+            url: '/error',
+            views: {
+                '': {
+                    templateUrl: 'tpls/404.html'
+                }
 
-    $urlRouterProvider.otherwise('index');
+            }
+        })
+        // .state('tree', {
+        //     url: '/tree',
+        //     views: {
+        //         '': {
+        //             templateUrl: 'tpls/role/tree.html',
+        //             controller:"treeCtrl"
+        //         }
+        //
+        //     }
+        // })
+
+
+    $urlRouterProvider.otherwise('login');
 });
+mainApp.run(function($rootScope,permissionService,$state,LocalStorageServices,$location) {
+    //进入每个页面都进行权限查询:
+    $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
+        //console.log(event,toState,toStateParams);
+        //console.log(toState);\
+        $rootScope.toMenuUrl = toState.name;
+        var url = toState.name;
+        var urlNoIntercept =  ['login','error'];
+        for(var i = 0;i<urlNoIntercept.length;i++){
+            if(url  == urlNoIntercept[i]){
+                return ;
+            }
+        }
+        //menuList = LocalStorageServices.get("menulist",null);
+        menuUrlId = LocalStorageServices.get("menuUrlId",null);
+        var menuId = menuUrlId[url];
+        if(menuId == null){
+            $location.path('error');
+            return ;
+        }
+        //判断是否有进入菜单的权限:
+        if(!permissionService.isPermission(menuUrlId[url],'menu')){
+            $location.path('error');
+        }
+    })
+})
+// mainApp.config(function($ngBootboxConfigProvider) {
+//     //$ngBootboxConfigProvider.setDefaultLocale('sv');
+//
+//     $ngBootboxConfigProvider.addLocale('ex', { OK: '是', CANCEL: '取消', CONFIRM: '是' });
+//     $ngBootboxConfigProvider.setDefaultLocale('ex');
+//     //$ngBootboxConfigProvider.removeLocale('ex');
+// })

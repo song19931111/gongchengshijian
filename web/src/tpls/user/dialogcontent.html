@@ -8,8 +8,8 @@
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-6">
-                <input type="email" class="form-control" id="username" name="username" placeholder="用户名"
-                       ng-model="item.username" required user-unique url="test/username.json"
+                <input type="text" class="form-control" id="username" name="username" placeholder="用户名"
+                       ng-model="item.username" required valid-unique valueName="userList" value="username" url="test/username.json"
                        ng-maxlength="20" ng-minlength="4"
                 >
             </div>
@@ -17,7 +17,7 @@
                 <label ng-message="required">用户名不能为空</label>
                 <label ng-message="minlength">用户名最小长度为4</label>
                 <label ng-message="maxlength">用户名最大长度为20</label>
-                <label ng-message="userUnique">用户名不唯一</label>
+                <label ng-message="validUnique">用户名不唯一</label>
             </div>
         </div>
         <div class="form-group">

@@ -2,13 +2,15 @@
  * Created by xiangsong on 2017/4/7.
  */
 angular.module('mainApp')
-    .directive('userUnique',['$http',function ($http) {
+    .directive('validUnique',['$http',function ($http) {
         return {
             restrict:'AE'
             ,require:'ngModel'
             ,scope:{
                 url:'@',
-                mailUnique:'@'
+                mailUnique:'@',
+                value:'@',
+                namelist:'@'
             }
             ,link:function (scope,element,attrs,ctrl) {
                 /*ctrl.$parsers.push(function (viewValue) {
@@ -23,19 +25,21 @@ angular.module('mainApp')
                         ,params:{username:viewValue}
                     }).then(function (ret) {
                         //console.log(data);
-                        angular.forEach(ret.data,function (item) {
-
+                        angular.forEach(ret.data[scope.namelist],function (item) {
+                            console.log(ret.data);
                             if(flag==false)
                                 return;
-                            console.log( viewValue+"   "+item.username);
-                            if(item.username==viewValue){
-                                console.log( "重复"+item.username);
+                            console.log(scope.value);
+                            console.log( viewValue+"   "+item[scope.value]);
+
+                            if(item[scope.value]==viewValue){
+                                console.log( "重复"+item[value]);
                                 flag=false;
                             }
                         });
-                        ctrl.$setValidity('userUnique',flag);
+                        ctrl.$setValidity('validUnique',flag);
                     }).catch(function (data) {
-                        ctrl.$setValidity('userUnique',false);
+                        ctrl.$setValidity('validUnique',false);
                     });
                     return viewValue;
                 });

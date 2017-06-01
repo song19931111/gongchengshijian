@@ -1,0 +1,55 @@
+{
+  "total": "10",
+  "rows": [
+    {
+      "courseId": "1",
+      "userId": "2",
+      "userName": "song",
+      "tName": "教师的名称",
+      "tId": "3",
+      "courseName": "工程实践",
+      "date": "2017-5-31 5:15",
+      "isAttend": 0
+    },
+    {
+      "courseId": "1",
+      "userId": "2",
+      "userName": "song",
+      "tName": "教师的名称",
+      "tId": "3",
+      "courseName": "工程实践",
+      "date": "2017-5-31 5:15",
+      "isAttend": 0
+    },
+    {
+      "courseId": "1",
+      "userId": "2",
+      "userName": "song",
+      "tName": "教师的名称",
+      "tId": "3",
+      "courseName": "工程实践",
+      "date": "2017-5-31 5:15",
+      "isAttend": 1
+    },
+    {
+      "courseId": "1",
+      "userId": "2",
+      "userName": "song",
+      "tName": "教师的名称",
+      "tId": "3",
+      "courseName": "工程实践",
+      "date": "2017-5-31 5:15",
+      "isAttend": 1
+    },
+    {
+      "courseId": "1",
+      "userId": "2",
+      "userName": "song",
+      "tName": "教师的名称",
+      "tId": "3",
+      "courseName": "工程实践",
+      "date": "2017-5-31 5:15",
+      "isAttend": 0
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+$energized:#87CEEB !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "www/lib/animate.css/animate";
+
+
+$theme: #87CEEB;
+$dark:#696969;
+$white:#FFFFFF;
+.login-page,
+.signup-page
+{
+  text-align:center;
+
+  .logo{
+    background-image: url("../pages/login/img/vlogo.png");
+    width: 150px;
+    margin: 10% auto 0px auto;
+    background-size: 150px;
+    background-repeat: no-repeat;
+  }
+  .logo-desc {
+    color: #C01A1A;
+    font-size: 13px;
+  }
+
+  .list {
+    width:88%;
+    margin: 20% auto 30px auto;
+  }
+  .login-btn-group {
+    margin: 0 auto 30px auto;
+    color: #666;
+  }
+  .login-btn{
+    width:88%;
+    background-color: $theme;
+    border-color: $theme;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin: 10% auto 0px auto;
+  }
+  label.item-input input{
+    background: transparent;
+    font-size : 16px;
+    letter-spacing: 0.5px;
+  }
+}
+.homepage{
+  background: #f5f5f5;
+
+  .swiper-container{
+    height:0;
+    padding-top:42.1875%;
+  }
+  .swiper-slide img {
+    width: 100%;
+  }
+  .round-progress-wrapper {
+    display: block;
+    height:0;
+    padding-top:100%;
+
+    svg{
+      margin-top: -25px;
+      margin-left: -25px;
+    }
+  }
+  ion-slide:nth-child(2n){
+    background: #f5f5f5;
+  }
+  .slider{
+    img {
+      width:100%
+    }
+  }
+
+  .item-carousel {
+    margin-top:10px;
+    .item-text-wrap{
+      font-size:12px;
+    }
+    p{
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: initial;
+      .curr-price{
+        font-size: 14px;
+      }
+    }
+  }
+  .item-image {
+    padding: 0;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+
+    &.full-height {
+      height: 100%;
+      padding-bottom: 0;
+    }
+
+    .round-progress-wrapper {
+      display: block;
+      height:0;
+      padding-top:100%;
+
+      svg{
+        margin-top: -25px;
+        margin-left: -25px;
+      }
+    }
+    img {
+      width: 100%;
+      display:inline-block;
+      top:50%;
+    }
+    .item-image-text{
+      p {
+        font-size:14px;
+      }
+      position:absolute;
+      top:32%;
+      left:50%;
+      margin-left:-28px;
+    }
+  }
+
+  .item-banner-image {
+    padding: 0;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    padding-bottom:42.1875%;
+
+    img {
+      width: 100%;
+    }
+    .tri {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 1.5em 1.5em 1.5em;
+      border-color: transparent transparent #f5f5f5 transparent;
+      position: absolute;
+      content: "";
+      display: block;
+      bottom: -12px;
+      left: 50%;
+      margin-left: -14px;
+    }
+  }
+
+  .intro-box{
+    background: white;
+    a {
+      display: block;
+      text-align: center;
+    }
+
+    .icon{
+      vertical-align: middle;
+      width: 36px;
+      height: 36px;
+      display: block;
+      margin:0 auto;
+      &.category{
+        background: url("../img/icons/category.png") no-repeat;
+        background-size: 36px;
+      }
+      &.calculate{
+        background: url("../img/icons/calculate.png") no-repeat;
+        background-size: 36px;
+      }
+      &.limit{
+        background: url("../img/icons/limit.png") no-repeat;
+        background-size: 36px;
+      }
+      &.send{
+        background: url("../img/icons/send_list.png") no-repeat;
+        background-size: 36px;
+      }
+    }
+    p {
+      padding-top: 8px;
+      margin-bottom: 0px;
+    }
+  }
+}
+
+/**    Account Section      **/
+
+.account-view {
+  background: #f5f5f5;
+  top: 250px;
+
+  .button-bar{
+    background: white;
+
+    &.switch-bar{
+      .button{
+        border: 1px solid #f5f5f5;
+      }
+      .active{
+        border-bottom: 2px solid $theme;
+        color: $theme;
+        opacity:0.9;
+      }
+    }
+
+    &.icon-top{
+      .button {
+        font-size: 14px;
+        line-height: 14px; // Add
+        padding-bottom: 6px;
+      }
+      .button-icon {
+        .icon{
+          display: block;
+        }
+        .icon:before{
+          font-size: 26px;
+          line-height:36px;
+        }
+      }
+    }
+  }
+};
+
+.avatar-section{
+  display: block;
+  height: 250px;
+  .logo {
+    display: block;
+    position: relative;
+    padding: 50px 8px;
+    text-align: center;
+    font-size: 16px;
+    height: 250px;
+    -webkit-filter:blur(35px);
+  }
+  .user{
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    margin-top:28px
+  }
+  .avatar-wrap{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -100px;
+    width: 200px;
+    text-align:center
+  }
+  .follow_btn{
+    position: absolute;
+    left: 50%;
+    margin-left: 80px;
+    text-align: center;
+    display: inline-block;
+
+    button {
+      height: 28px;
+      width: 58px;
+      font-size: 14px;
+      border: 1px solid ;
+    }
+  }
+  .social-btns{
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    margin-left: -100px;
+    width: 200px;
+    text-align:center;
+    padding-bottom:20px;
+    a{
+      margin:0 8px;
+      color: white;
+    }
+    strong{
+      font-size:20px;
+    }
+  }
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  box-shadow: 1px 1px 2px;
+}
+
+.account i.icon{
+  color: grey;
+  font-size: 25px;
+}
+.account i.ion-ios-arrow-right{
+  color: #888;
+  font-size: 18px;
+}
+.button.account-setting-btn{
+  z-index: 1000;
+  border-radius: 50%;
+  margin-top: 14px;
+  padding: 0;
+  color: grey;
+}
+
+.avatar-section .login-btn{
+  font-size: 14px;
+  width: 80px;
+  text-align: center;
+  margin: 0 auto;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+
+.copyright {
+  margin: 20px 0 10px;
+  text-align: center;
+  color: #aaa;
+  text-shadow: 0 1px 0 #fff;
+}
+.about .logo {
+  //background-image: url("../img/icon.jpg");
+  width: 100px;
+  height: 100px;
+  margin: 10% auto 10% auto;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  border-radius: 28px;
+}
+.toast-container{
+  position: fixed;
+  width:100%;
+  bottom: 50px;
+  z-index: 10;
+  opacity: .9;
+  -webkit-transition: opacity 0.5s ease-out ;
+  -moz-transition: opacity 0.5s ease-out;
+  -ms-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+}
+.toast-message{
+  width: 270px;
+  margin: 5px auto;
+  padding:5px;
+  background-color: $dark;
+  text-align: center;
+  color:$white;
+  border-radius: 7px;
+  font-size: 14px;
+}

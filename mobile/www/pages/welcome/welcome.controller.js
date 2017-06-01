@@ -14,14 +14,8 @@
       $scope.previous = function () {
         $ionicSlideBoxDelegate.previous();
       };
-
-
-
-      if (currentPlatform && currentPlatform == 'android') {
         $scope.device = 'android';
-      } else {
         $scope.device = 'iphone';
-      }
 
       $scope.slides = [{
         top: '介绍1',
@@ -41,7 +35,6 @@
 
       $scope.goHome = function(){
         $state.go('login');
-        Storage.set('introPage','alreadyShow');
       };
 
 

@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular.module('mainApp')
-        .controller('navCtrl',['$scope','menuAjaxService','userAjaxService',function ($scope,menuAjaxService) {
+        .controller('navCtrl',['$scope','menuAjaxService','userAjaxService','LocalStorageServices',function ($scope,menuAjaxService,userAjaxService,LocalStorageServices) {
             //sessionStorage取得用户登陆的信息：
 
 
@@ -22,98 +22,98 @@
             // });
             $scope.menulist = [
                 {
-                menuid:1,
-                menuname:"用户管理",
-                    children:null,
+                    menuId:0,
+                    menuName:"首页",
+                    children:"",
+                    url:"base.index",
+                    isPage:true
+                },
+                {
+                menuId:1,
+                menuName:"用户管理",
+                    children:"",
                 url:"base.index.user",
                     isPage:true
                 },
                 {
-                    menuid:2,
-                    menuname:"角色管理",
-                    children:null,
+                    menuId:2,
+                    menuName:"角色管理",
+                    children:"",
                     url:"base.index.role",
                     isPage:true
                 },
                 {
-                    menuid:3,
-                    menuname:"权限管理",
+                    menuId:3,
+                    menuName:"权限管理",
                     children:"",
                     url:"base.index.power"
                 },
                 {
-                    menuid:4,
-                    menuname:"数据字典",
-                    children:[
-                        {
-                        menuid:11,
-                        menuname:"数据字典主表",
-                        children:"",
-                       url:"base.index.dict"
-                        },
-                        {
-                            menuid:12,
-                            menuname:"数据字典明细表",
-                            children:"",
-                            url:"base.index.dict_detail"
-                        }
-
-                    ],
-                    url:"base.index.dict"
+                    menuId:4,
+                    menuName:"数据字典",
+                    url:"base.index.dict",
+                    children:""
                 },
                 {
-                    menuid:5,
-                    menuname:"系统设置",
+                    menuId:5,
+                    menuName:"系统设置",
                     children:[
-                        {menuid:6,
-                            menuname:"考勤基本信息设置",
-                            children:null,
+                        {menuId:6,
+                            menuName:"考勤基本信息设置",
+                            children:"",
                             url:"base.index.attend_base_info",
                             isPage:true},
-                        {menuid:7,
-                            menuname:"考勤参数设置",
-                            children:null,
+                        {menuId:7,
+                            menuName:"考勤参数设置",
+                            children:"",
                             url:"base.index.attend_parameter",
                             isPage:true},
-                        {menuid:8,
-                            menuname:"考勤权重设置",
-                            children:null,
+                        {menuId:8,
+                            menuName:"考勤权重设置",
+                            children:"",
                             url:"base.index.attend_weight",
                             isPage:true},
                     ],
-                    url:null
+                    url:'base.index.attend_base_info'
                 },
                 {
-                    menuid:9,
-                    menuname:"考勤信息汇总",
+                    menuId:9,
+                    menuName:"考勤信息汇总",
                     children:"",
                     url:"base.index.chart"
                 },
                 {
-                    menuid:9,
-                    menuname:"班级管理",
+                    menuId:10,
+                    menuName:"班级管理",
                     children:[
-                        {menuid:6,
-                            menuname:"班级基本管理",
-                            children:null,
+                        {menuId:11,
+                            menuName:"班级基本管理",
+                            children:"",
                             url:"base.index.class_info",
                             isPage:true},
-                        {menuid:7,
-                            menuname:"班级学生导入",
-                            children:null,
+                        {menuId:12,
+                            menuName:"班级学生导入",
+                            children:"",
                             url:"base.index.import_class_info",
                             isPage:true}
                     ],
                     url:"base.index.manageclass"
                 },
                 {
-                    menuid:9,
-                    menuname:"成绩管理",
+                    menuId:13,
+                    menuName:"成绩管理",
                     children:"",
                     url:"base.index.manageclass"
                 },
 
             ]
+            var menuUrlId = {};
+
+            for(var i=0;i<$scope.menulist.length;i++){
+                menuUrlId[$scope.menulist[i].url] = $scope.menulist[i].menuId;
+            }
+            LocalStorageServices.update("menulist",$scope.menulist);
+            LocalStorageServices.update("menuUrlId",menuUrlId);
         }])
 
 })()

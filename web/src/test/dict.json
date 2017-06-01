@@ -1,0 +1,25 @@
+{"total":3,"dictList":
+[
+  {
+    "id": 1,
+    "name": "数据字典1",
+    "englishName": "dict",
+    "des": "数据字典的描述",
+    "isSystem": 0
+  },
+  {
+    "id": 2,
+    "name": "数据字典2",
+    "englishName": "dict",
+    "des": "数据字典的描述",
+    "isSystem": 0
+  },
+  {
+    "id": 3,
+    "name": "数据字典3",
+    "englishName": "dict",
+    "des": "数据字典的描述",
+    "isSystem": 0
+  }
+]
+}

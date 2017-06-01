@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular.module('mainApp')
-        .controller('UserCtrl',['$scope','userAjaxService','$uibModal','$state' ,function ($scope,userAjaxService,$uibModal,$state) {
+        .controller('UserCtrl',['$scope','userAjaxService','$uibModal','$state','$ngBootbox',function ($scope,userAjaxService,$uibModal,$state,$ngBootbox) {
 
             $scope.onSortChange = function(orderBy,asc){
                 console.log(orderBy,asc);
@@ -137,6 +137,13 @@
             ///////////////////////////////////////删除用户Start//////////////////////////////////////////////
             $scope.delete = function (){
                 console.log("删除"+$scope.selected);
+              //  $ngBootbox.addLocale()
+                $ngBootbox.confirm('确认要删除吗?')
+                    .then(function() {
+                        console.log('Confirmed!');
+                    }, function() {
+                        console.log('Confirm dismissed!');
+                    });
 
             }
 
@@ -183,6 +190,9 @@
         .controller('ModalInstanceCtrlUser', function ($scope, $uibModalInstance, items) {
 //这是模态框的控制器,记住$uibModalInstance这个是用来调用函数将模态框内的数据传到外层控制器中的,items则上面所说的入参函数,它可以获取到外层主控制器的参数
         $scope.item = items;//这里就可以去外层主控制器的数据了
+        var $ctrl = this;
+           //要用深复制
+
             if($scope.item == 'none'){
                 $scope.title = "新增用户";
                 $scope.item = {"username":"","tel":'',"mail":"","type":"add"};
