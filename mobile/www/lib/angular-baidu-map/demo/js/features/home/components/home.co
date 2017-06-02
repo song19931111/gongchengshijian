@@ -1,0 +1,53 @@
+import {stop} from '../../../fw/helper/event';
+import './home.css';
+
+const ORIENTAL_PEARL = {
+    longitude: 121.506191,
+    latitude: 31.245554
+};
+
+
+export default {
+    template: `
+    <h1 class="page-title">angular-baidu-map</h1>
+
+    <baidu-map map-options="$ctrl.opts">
+        <marker point="$ctrl.markerPoint1" click="$ctrl.onMarker1Clicked(e, marker)"></marker>
+        <control type="navigation"></control>
+        <control type="overviewmap"></control>
+    </baidu-map>
+
+    <github></github>
+
+    <div class="home-desc">
+        <about class="section"></about>
+        <version class="section"></version>
+        <contribution class="section"></contribution>
+    <div>
+    `,
+    controller: class {
+        /* @ngInject */
+        constructor($timeout, mapScriptService) {
+            this.opts = {
+                currentCity: '上海市',
+                centerAndZoom: {
+                    ...ORIENTAL_PEARL,
+                    zoom: 16
+                }
+            };
+            this.markerPoint1 = ORIENTAL_PEARL;
+            mapScriptService.load();
+        }
+
+        onLoadMap(map) {
+            console.log('Map is created', map);
+        }
+
+        onMarker1Clicked(e, marker) {
+            stop(e.domEvent);
+            const p = marker.getPosition();
+            //eslint-disable-next-line
+            alert(`The marker you clicked at: ${p.lng}, ${p.lat}`);
+        }
+    }
+};
