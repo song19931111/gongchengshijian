@@ -48,6 +48,19 @@ angular.module('starter.controllers')
        // 添加到地图当中
       scope.map.addControl(myZoomCtrl);
 
+      scope.$on('updateGInfoByLocation', function(event, data){
+        var point = new BMap.Point(data.longitude,data.latitude);
+        scope.map.centerAndZoom(point,19);
+        scope.gInfo.longitude = data.longitude;
+        scope.gInfo.latitude = data.latitude;
+        var myGeo = new BMap.Geocoder();
+        myGeo.getLocation(point, function(result){
+          if (result){
+            scope.gInfo.address = result.address;
+            scope.$emit('updateGInfo',scope.gInfo);
+          }
+        });
+      });
 
 
       scope.map.addEventListener("dragend",function(){
@@ -59,7 +72,7 @@ angular.module('starter.controllers')
           myGeo.getLocation(new BMap.Point(scope.gInfo.longitude,scope.gInfo.latitude), function(result){
            if (result){
              scope.gInfo.address = result.address;
-             $rootScope.$emit('updateGInfo',scope.gInfo);
+             scope.$emit('updateGInfo',scope.gInfo);
            }
          });
 

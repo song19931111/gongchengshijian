@@ -81,29 +81,18 @@
             console.log( $scope.gInfo);
           }
           $scope.tirarFoto = function(){
-            /*alert("开始定位");*/
-            baidu_location.getCurrentPosition(function(data){
-              /*alert(data);*/
+            baidu_location.getCurrentPosition(function(data) {
               $scope.gInfo.longitude = data.longitude;
               $scope.gInfo.latitude = data.latitude;
-              $scope.map.centerAndZoom(new BMap.Point(data.longitude,data.latitude),18);
-              $scope.map.enableScrollWheelZoom(true);
-              var myGeo = new BMap.Geocoder();
-              // 根据坐标得到地址描述
-              myGeo.getLocation(new BMap.Point(data.longitude,data.latitude), function(result){
-                if (result){
-                  $scope.gInfo.address = result.address;
-                }
-              });
-            }, function(err){
-              alert("获取地址错误："+err)
+              $scope.$broadcast("updateGInfoByLocation", $scope.gInfo);
+              angular.element("#address").click();
             });
           };
           $scope.confirmByMapSelected = function () {
             //根据图中的所选，确定位置
 
           }
-          $rootScope.$on('updateGInfo', function(event, data){
+          $scope.$on('updateGInfo', function(event, data){
             $scope.gInfo =data;
             angular.element("#address").click();
           });
