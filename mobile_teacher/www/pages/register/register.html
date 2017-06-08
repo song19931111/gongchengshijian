@@ -1,0 +1,71 @@
+<ion-header-bar class="bar-energized">
+  <h1 class="title">学生注册</h1>
+</ion-header-bar>
+<ion-content class="has-header login-page">
+  <form name="myForm">
+  <div class="list list-item">
+    <label class="item item-input"
+    >
+      <input type="number" placeholder="手机号" name="tel" ng-model="regInfo.tel" required ng-pattern="/^1[34578]\d{9}$/">
+    </label>
+
+    <label class="item item-input" style="margin-top: 20px;";>
+      <input type="password"  name="password" placeholder="密码" ng-model="regInfo.password" required ng-minlength="6" ng-maxlength="16">
+    </label>
+    <label class="item item-input" style="margin-top: 20px;";>
+      <input type="password"  name="confirmPassword" placeholder="确认密码" ng-model="regInfo.confirmPassword" required ng-minlength="6" ng-maxlength="16">
+    </label>
+
+    <!--<div class="row">-->
+    <!--<label class="item item-input item-button-right col col-75" style="margin-top: 20px;";>-->
+    <!--<input type="password" placeholder="密码" ng-model="user.password" style="float:left;">-->
+    <!--</label>-->
+    <!--<div class="col col-30">-->
+    <!--<button class=" col  button button-energized" style="float:left;" ng-click="login()">登陆</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="item item-input" style="margin-top: 20px;">
+      <input type="number" required name="code" ng-model="regInfo.code" placeholder="验证码" />
+      <button class="button button-positive button-small"   ng-disabled="isButtonDisable" ng-click="sendCode(myForm.tel.$error)">{{codetime}} </button>
+    </div>
+  </div>
+    <button type="submit" class="button button-block login-btn" ng-click="goNextStep(myForm.$error);">下一步</button>
+  </form>
+
+  <div class="toast-container active" ng-messages="myForm.tel.$error" ng-if="myForm.tel.$touched ||myForm.$submitted">
+    <div class="toast-message">
+      <div ng-message="required">手机号不能为空</div>
+      <div ng-message="pattern">手机号格式不正确</div>
+    </div>
+  </div>
+  <!--密码-->
+  <div class="toast-container active" ng-messages="myForm.password.$error"
+       ng-if="myForm.password.$touched || myForm.$submitted">
+    <div class="toast-message" ng-message="required">密码不能为空</div>
+    <div class="toast-message" ng-message="minlength">密码长度必须大于6</div>
+    <div class="toast-message" ng-message="maxlength">密码长度必须小于16</div>
+  </div>
+  <div class="toast-container active" ng-messages="myForm.confirmPassword.$error"
+       ng-if="myForm.confirmPassword.$touched || myForm.$submitted">
+    <div class="toast-message" ng-message="required">确认密码不能为空</div>
+    <div class="toast-message" ng-message="minlength">确认密码长度必须大于6</div>
+    <div class="toast-message" ng-message="maxlength">确认密码长度必须小于16</div>
+  </div>
+  <div class="toast-container active"
+       ng-if="(myForm.confirmPassword.$touched || myForm.$submitted)&&(regInfo.password!=regInfo.confirmPassword)">
+    <div class="toast-message">新密码和确认密码不一致</div>
+  </div>
+
+  <div class="toast-container active"
+       ng-if="(myForm.code.$touched || myForm.$submitted)&&(regInfo.code != regInfo.generateCode)">
+    <div class="toast-message">手机验证码不正确</div>
+  </div>
+  <div class="toast-container active" ng-messages="myForm.code.$error"
+       ng-if="myForm.code.$touched || myForm.$submitted"
+  >
+    <div class="toast-message" ng-message="required">验证码不能为空</div>
+  </div>
+
+  <!--<div><pre>{{myForm.code.$error}}</pre></div>-->
+</ion-content>
+

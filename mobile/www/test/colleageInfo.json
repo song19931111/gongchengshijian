@@ -1,0 +1,5 @@
+[
+  {"professionName":"数学与计算机","classList":[{"classId":1,"name":"计算机技术1班"},{"classId":2,"name":"计算机技术2班"}]},
+  {"professionName":"英语","classList":[{"classId":3,"name":"英语1班"},{"classId":4,"name":"英语2班"}]},
+  {"professionName":"数学","classList":[{"classId":5,"name":"数学1班"},{"classId":6,"name":"数学2班"}]}
+]

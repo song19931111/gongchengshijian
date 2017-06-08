@@ -1,0 +1,24 @@
+<ion-view view-title="设置上课地点">
+  <ion-content>
+    <button class="button button-block button-positive icon-left" ng-click="tirarFoto()">
+      获取地理定位
+    </button>
+    <div class="list card">
+
+      <a  id="address" class="item item-icon-left" ng-click="test()">
+        <i class="icon ion-home"></i>
+        {{gInfo.address}}
+      </a>
+      <a  id="position" class="item item-icon-left">
+        <i class="icon ion-home"></i>
+        经度:&nbsp;<span ng-bind="gInfo.longitude"></span>&nbsp;&nbsp;纬度&nbsp;{{gInfo.latitude}}
+      </a>
+    </div>
+    <app-map   style="height:400px;width:100%;"> </app-map>
+    <!--<div id="allmap"></div>-->
+
+    <!--<button  style="position: absolute;margin-bottom: 3px;" class="button button-block button-positive icon-left">-->
+      <!--确认并返回-->
+    <!--</button>-->
+  </ion-content>
+</ion-view>

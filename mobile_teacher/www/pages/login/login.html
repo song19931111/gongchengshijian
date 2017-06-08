@@ -1,0 +1,42 @@
+<ion-view title="登陆">
+
+  <ion-content class="login-page overlay-content">
+    <div class="logo"></div>
+    <div class="list list-item">
+      <label class="item item-input">
+       <input type="text" placeholder="手机号" ng-model="user.tel">
+      </label>
+
+      <label class="item item-input" style="margin-top: 20px;"; ng-if="isUserCode==false">
+      <input type="password"  placeholder="密码" ng-model="user.password">
+    </label>
+    <!--<div class="row">-->
+      <!--<label class="item item-input item-button-right col col-75" style="margin-top: 20px;";>-->
+        <!--<input type="password" placeholder="密码" ng-model="user.password" style="float:left;">-->
+      <!--</label>-->
+      <!--<div class="col col-30">-->
+      <!--<button class=" col  button button-energized" style="float:left;" ng-click="login()">登陆</button>-->
+      <!--</div>-->
+    <!--</div>-->
+      <div class="item item-input" style="margin-top: 20px;"; ng-if="isUserCode">
+        <input type="text" placeholder="验证码" />
+        <button class="button button-positive button-small" ng-disabled="isButtonDisable" ng-click="sendCode()">{{codetime}}</button>
+      </div>
+    </div>
+
+    <button class="button button-block login-btn" ng-click="login()">登陆</button>
+
+    <div class="list login-btn-group">
+      <button class="button button-clear button-dark pull-left" ng-click="showForgotPWBox()">
+        忘记密码?
+      </button>
+      <button class="button button-clear button-dark pull-right" ui-sref="register">
+        注册
+      </button>
+    </div>
+
+    <div class="third-party-box">
+      <a ng-click="changeLoginMethod();">{{loginMethodText}}</a>
+    </div>
+  </ion-content>
+</ion-view>

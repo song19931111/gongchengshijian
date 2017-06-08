@@ -2,13 +2,14 @@
 
   <ion-content class="login-page overlay-content">
     <div class="logo"></div>
+    <form name="myForm">
     <div class="list list-item">
       <label class="item item-input">
-       <input type="text" placeholder="手机号" ng-model="user.tel">
+       <input type="number" name="tel" placeholder="手机号" ng-model="userInfo.tel" required ng-pattern="/^1[34578]\d{9}$/">
       </label>
 
       <label class="item item-input" style="margin-top: 20px;"; ng-if="isUserCode==false">
-      <input type="password"  placeholder="密码" ng-model="user.password">
+      <input type="password"  name="password" placeholder="密码" ng-model="userInfo.password" required ng-minlength="6" ng-maxlength="16">
     </label>
     <!--<div class="row">-->
       <!--<label class="item item-input item-button-right col col-75" style="margin-top: 20px;";>-->
@@ -19,13 +20,13 @@
       <!--</div>-->
     <!--</div>-->
       <div class="item item-input" style="margin-top: 20px;"; ng-if="isUserCode">
-        <input type="text" placeholder="验证码" />
+        <input type="number" name="code"  placeholder="验证码" required ng-model="userInfo.code"/>
         <button class="button button-positive button-small" ng-disabled="isButtonDisable" ng-click="sendCode()">{{codetime}}</button>
       </div>
     </div>
 
-    <button class="button button-block login-btn" ng-click="login()">登陆</button>
-
+    <button type="submit" class="button button-block login-btn" ng-click="goNextStep(myForm.$error)">下一步</button>
+    </form>
     <div class="list login-btn-group">
       <button class="button button-clear button-dark pull-left" ng-click="showForgotPWBox()">
         忘记密码?
@@ -37,6 +38,26 @@
 
     <div class="third-party-box">
       <a ng-click="changeLoginMethod();">{{loginMethodText}}</a>
+    </div>
+    <!--toast提示-->
+    <div class="toast-container active" ng-messages="myForm.password.$error"
+         ng-if="(myForm.password.$touched || myForm.$submitted)&&!isUserCode">
+      <div class="toast-message" ng-message="required">密码不能为空</div>
+      <div class="toast-message" ng-message="minlength">密码长度必须大于6</div>
+      <div class="toast-message" ng-message="maxlength">密码长度必须小于16</div>
+    </div>
+
+    <div class="toast-container active"
+         ng-if="(myForm.code.$touched || myForm.$submitted)&&(userInfo.code != userInfo.generateCode)&&isUserCode">
+      <div class="toast-message">手机验证码不正确</div>
+    </div>
+    <div class="toast-container active" ng-messages="myForm.code.$error"
+         ng-if="(myForm.code.$touched || myForm.$submitted) && isUserCode">
+      <div class="toast-message" ng-message="required">验证码不能为空</div>
+    </div>
+    <div class="toast-container active" ng-messages="myForm.tel.$error" ng-if="myForm.tel.$touched ||myForm.$submitted">
+      <div class="toast-message" ng-message="required">手机号不能为空</div>
+      <div class="toast-message" ng-message="pattern">手机号格式不正确</div>
     </div>
   </ion-content>
 </ion-view>

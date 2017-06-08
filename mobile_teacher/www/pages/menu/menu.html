@@ -1,0 +1,56 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable bar-energized">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" ></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content class="dark-bg">
+      <div class="row row-center row-no-padding padding-left padding-right">
+        <!--TODO-->
+        <div class="col col-66">
+          <h4 class="light">戴鹏</h4>
+          <h6 class="stable">戴鹏 160327045</h6>
+        </div>
+        <span class="energized-bg light">&nbsp;高级版&nbsp;</span>
+      </div>
+      <div class="list margin-left menu-side">
+        <!--menu没有会导致菜单关闭-->
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-social-yen-outline"></i> <span class="stable">资金账户</span>
+          <i class="icon ion-chevron-right"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-ios-briefcase-outline"></i> 手机橱窗
+          <i class="icon ion-chevron-right"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-android-share-alt"></i> 邀请有礼
+          <i class="icon ion-chevron-right"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-ios-chatboxes-outline"></i> 开店论坛
+          <i class="icon ion-chevron-right"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-android-create"></i> 反馈建议
+          <i class="icon ion-chevron-right"></i>
+        </a>
+        <a class="item item-icon-left item-icon-right dark-bg stable" href="" menu-close>
+          <i class="icon ion-android-favorite-outline"></i> 帮助中心
+          <i class="icon ion-chevron-right"></i>
+        </a>
+      </div>
+    </ion-content>
+    <ion-footer-bar class="bar-dark bar" menu-close>
+      <a class="button button-small button-clear button-light icon-left ion-ios-gear" ui-sref="app.setting">设置</a>
+    </ion-footer-bar>
+  </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,20 @@
+<ion-view view-title="查看考勤情况">
+  <ion-content>
+    <div class="list list-inset">
+
+      <div class="item" ng-repeat="course in courseInfo">
+          <div class="row">
+            <div class="col-66">
+              <p>课程名称:{{course.courseName}}</p>
+              <p>上课时间:{{course.date}}</p>
+            </div>
+            <div class="col col-33">
+                 <div><img class="card-image" ng-src="{{imgSrc[course.isAttend]}}" align="right"></div>
+            </div>
+        </div>
+      </div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll on-infinite="loadMore()" distance="1%" immediate-check="false" ng-if="hasMore">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

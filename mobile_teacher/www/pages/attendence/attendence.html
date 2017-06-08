@@ -1,0 +1,23 @@
+<ion-view view-title="签到">
+  <ion-content>
+    <div id="allmap" ng-show="false"></div>
+    <div class="list card">
+      <a href="#" class="item item-icon-left" ui-sref="app.setplace">
+        <i class="icon ion-card"></i>
+        签到地点:{{attendInfo.place}}
+      </a>
+      <a href="#" class="item item-icon-left">
+        <i class="icon ion-card"></i>
+        课程名称:工程实践
+      </a>
+      <a href="#" class="item item-icon-left">
+        <i class="icon ion-card"></i>
+        距离上课还有:1分钟
+      </a>
+
+    </div>
+    <div class="row" ng-repeat="item in arrSeat">
+      <div class="col box" ng-click="selectSeat($parent.$index,$index);" ng-repeat="subItem in item track by $index"><img ng-src="{{imgArrSeatSrc[subItem]}}">{{$parent.$index*colCount+($index+1)}}</div>
+    </div>
+  </ion-content>
+</ion-view>

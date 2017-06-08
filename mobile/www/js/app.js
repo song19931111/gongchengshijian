@@ -147,6 +147,16 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
       templateUrl: 'pages/register/register.step2.html',
       controller: 'RegCtrl'
     })
+    .state('forgetPass', {
+      url: '/forgetPass',
+      templateUrl: 'pages/forgetPassword/forgetPassword.html',
+      controller: 'ForgetPasswordCtrl'
+    })
+    .state('updatePass', {
+      url: '/updatePass',
+      templateUrl: 'pages/forgetPassword/updatePassword.html',
+      controller: 'ForgetPasswordCtrl'
+    })
     .state('app.home', {
       url: '/home',
       views: {

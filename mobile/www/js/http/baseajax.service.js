@@ -28,7 +28,7 @@ angular.module('starter.services')
                 ,url:DOMAIN + this.moduleName+'/getAll'
             });
         };
-        service.get = function (id) {
+        service.getById = function (id) {
             return $http({
                 method:'GET'
                 ,url:DOMAIN + this.moduleName+'/getById'
