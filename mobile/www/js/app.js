@@ -166,6 +166,15 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
         }
       }
     })
+    .state('app.selectCourse', {
+      url: '/selectCourse',
+      views: {
+        'menuContent': {
+          templateUrl: 'pages/selectCourse/selectCourse.html',
+          controller: 'selectCourseCtrl'
+        }
+      }
+    })
     .state('app.account', {
       url: '/account',
       views: {

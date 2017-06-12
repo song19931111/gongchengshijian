@@ -7,17 +7,23 @@ angular.module('starter.services')
     var service ={};
     service = Object.create(BaseAjaxService);
     service.moduleName = 'attend.json';
-    //得到已经上完的课的信息
-    service.getCompleteCourseInfo = function (index) {
-      console.log(DOMAIN + this.moduleName);
+
+
+
+    service.studentAttend = function (info) {
+      return $http({
+        method:'POST'
+        ,url:DOMAIN + this.moduleName+"/getCourseInfoLate",
+        data:angular.toJson(info)
+      });
+    }
+    service.getDistributionAndTime = function (id) {
       return $http({
         method:'GET'
-        ,url:DOMAIN + this.moduleName
-        // ,params:{
-        //   pageSize:PAGE_SIZE
-        //   ,pageIndex:index
-        // }
+        ,url:DOMAIN + this.moduleName+"/getDistributionAndTime",
+        params:{"infoId":id}
       });
-    };
+    }
+
     return service;
   }]);

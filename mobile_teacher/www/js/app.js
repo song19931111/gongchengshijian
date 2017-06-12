@@ -61,7 +61,6 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-
     .state('app', {
     url: '/app',
     abstract: true,
@@ -147,12 +146,31 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
       templateUrl: 'pages/register/register.step2.html',
       controller: 'RegCtrl'
     })
+    .state('forgetPass', {
+      url: '/forgetPass',
+      templateUrl: 'pages/forgetPassword/forgetPassword.html',
+      controller: 'ForgetPasswordCtrl'
+    })
+    .state('updatePass', {
+      url: '/updatePass',
+      templateUrl: 'pages/forgetPassword/updatePassword.html',
+      controller: 'ForgetPasswordCtrl'
+    })
     .state('app.home', {
       url: '/home',
       views: {
         'menuContent': {
           templateUrl: 'pages/home/home.html',
           controller: 'HomeCtrl'
+        }
+      }
+    })
+    .state('app.selectCourse', {
+      url: '/selectCourse',
+      views: {
+        'menuContent': {
+          templateUrl: 'pages/selectCourse/selectCourse.html',
+          controller: 'selectCourseCtrl'
         }
       }
     })
@@ -186,4 +204,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
     })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
-});
+})
+  .config(['$httpProvider',function ($httpProvider) {
+    $httpProvider.interceptors.push('TokenInterceptor')
+  }])

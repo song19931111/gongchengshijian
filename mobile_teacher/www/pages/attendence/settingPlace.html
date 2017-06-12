@@ -1,8 +1,26 @@
 <ion-view view-title="设置上课地点">
   <ion-content>
-    <button class="button button-block button-positive icon-left" ng-click="tirarFoto()">
-      获取地理定位
-    </button>
+
+    <div class="list card">
+    <div class="item item-input item-select">
+      <div class="input-label">
+       选择您设置的课程
+      </div>
+      <select ng-model="selectCourseItem.info" ng-options="item.courseName for item in courseInfoList" ng-change="changeCourse()">
+      </select>
+    </div>
+      <div class="item item-input row">
+
+        <div class="input-label">
+          行
+        </div>
+        <input type="number" placeholder="行" name="mail" ng-model="setSeatInfo.row" required>
+        <div class="input-label">
+          列
+        </div>
+        <input type="number" placeholder="列" name="mail" ng-model="setSeatInfo.col" required>
+      </div>
+    </div>
     <div class="list card">
 
       <a  id="address" class="item item-icon-left" ng-click="test()">
@@ -13,6 +31,26 @@
         <i class="icon ion-home"></i>
         经度:&nbsp;<span ng-bind="gInfo.longitude"></span>&nbsp;&nbsp;纬度&nbsp;{{gInfo.latitude}}
       </a>
+    </div>
+    <div>
+      <div class="row">
+        <button class="button button-energized button-block" ng-click="tirarFoto()">
+          获取地理定位
+        </button>
+      </div>
+      <div class="row">
+        <div class="col col-50">
+          <button class="button button-energized button-block" ng-click="confirm()">
+            确定签到信息
+          </button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-energized button-block" ng-click="confirmAndReturn()">
+            确定并返回
+          </button>
+        </div>
+
+      </div>
     </div>
     <app-map   style="height:400px;width:100%;"> </app-map>
     <!--<div id="allmap"></div>-->

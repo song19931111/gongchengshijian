@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('starter.controllers')
-        .controller('SetPlaceCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
+        .controller('SetPlaceCtrl', ['$scope','$rootScope','$ionicLoading','$cordovaToast','courseAjaxService','$ionicHistory', function ($scope,$rootScope,$ionicLoading,$cordovaToast,courseAjaxService,$ionicHistory) {
           $scope.longitude = '';
           $scope.latitude = '';
           $scope.address='';
@@ -10,6 +10,124 @@
             latitude:'',
             address:''
           };
+
+          //从服务器端得到
+          $scope.courseInfoList = [
+            {
+              infoId:1,
+              courseName:"工程实践",
+              isSetInfo:true,
+              seatRowCount:2,
+              seatDistribution:"0000000000",
+              position:"26.042926,119.3211243",
+            },
+            {
+              infoId:2,
+              courseName:"工程实践2",
+              isSetInfo:true,
+              seatRowCount:3,
+              seatDistribution:"000000000",
+              position:"26.042926,119.3211243"
+            },
+
+          ];
+          courseAjaxService.getCourseInfoTodayByTid().success(function (data, status, headers, config) {
+            if(data.length>0){
+              $scope.courseInfoList  =data;
+            }else{
+              $cordovaToast.showShortTop("该教师当天未有课程信息");
+            }
+          }).error(function (data, status, headers, config) {
+
+          })
+          $scope.setSeatInfo = {
+            row:0,
+            col:0,
+          };
+
+
+          $scope.selectCourseItem  = {info:""};
+          $scope.setCourseInfo = {
+            infoId:"",
+            seatRowCount:"",
+            position:"100,100", //设置的地理位置
+            seatDistribution:"",
+            isSetInfo:""
+          };
+
+          $scope.changeCourse = function () {
+            if($scope.selectCourseItem.info.isSetInfo == true ){
+            $scope.setSeatInfo.row = $scope.selectCourseItem.info.seatRowCount;
+            $scope.setSeatInfo.col = $scope.selectCourseItem.info.seatDistribution.length/$scope.selectCourseItem.info.seatRowCount;
+              var pos = $scope.selectCourseItem.info.position.split(",");
+            $scope.gInfo.longitude =parseFloat(pos[1]);
+            $scope.gInfo.latitude =parseFloat(pos[0]);
+            $scope.$broadcast("updateGInfoByLocation", $scope.gInfo);
+            angular.element("#address").click();
+            }
+          }
+
+
+
+
+
+          // 验证提交的信息是否合法
+          var isValid  =function () {
+            if($scope.setSeatInfo.row <=0 || $scope.setSeatInfo.col <=0){
+              $cordovaToast.showShortTop("行和列不能为0");
+              return false ;
+            }else if($scope.setCourseInfo.position==""){
+              $cordovaToast.showShortTop("还未定位并设置具体的位置信息");
+              return false ;
+            }else if($scope.selectCourseItem==""){
+              $cordovaToast.showShortTop("还未设置具体的课程");
+            }
+            return true;
+          }
+
+          $scope.confirm = function () {
+            //确认参数是否合法:
+            if(isValid() == false){
+              return ;
+            }
+            $scope.setCourseInfo.infoId = $scope.selectCourseItem.info.infoId;
+            //处理行列:
+            for(var i = 0;i<$scope.setSeatInfo.row*$scope.setSeatInfo.col;i++){
+              $scope.setCourseInfo+='0';
+            }
+            $scope.setCourseInfo.seatRowCount = $scope.setSeatInfo.row;
+
+            //确认
+            $ionicLoading.show({
+              template:'<span style="text-align:right;"><ion-spinner icon="ios" class="light"></ion-spinner>正在获取位置，请稍后.......</span>'
+              //template:'正在提交.......'
+            });
+            courseAjaxService.setCourseInfo($scope.setCourseInfo).success(function (data, status, headers, config) {
+              if(data.error == "none"){
+                $cordovaToast.showShortTop("更新成功");
+                var infoId = $scope.selectCourseItem.info.infoId;
+                for(var i=0;i<$scope.courseInfoList.length;i++){
+                  if($scope.courseInfoList[i].infoId == infoId){
+                    $scope.courseInfoList[i].position = $scope.setCourseInfo.position;
+                    $scope.courseInfoList[i].seatRowCount = $scope.setCourseInfo.seatRowCount;
+                    $scope.courseInfoList[i].seatDistribution = $scope.setCourseInfo.seatDistribution;
+                  }
+                }
+
+              }
+            }).error(function (data, status, headers, config) {
+
+            })
+
+          }
+          $scope.confirmAndReturn = function () {
+            //确认和返回
+            $scope.confirm();
+            $ionicHistory.goBack();
+
+
+          }
+
           // $scope.$watch('gInfo.longitude',function (newValue,oldValue) {
           //   if (newValue != oldValue) {
           //     $scope.gInfo.longitude =newValue;
@@ -84,8 +202,11 @@
             baidu_location.getCurrentPosition(function(data) {
               $scope.gInfo.longitude = data.longitude;
               $scope.gInfo.latitude = data.latitude;
+              $scope.setCourseInfo.position = $scope.gInfo.latitude.toString()+","+$scope.gInfo.longitude.toString();
               $scope.$broadcast("updateGInfoByLocation", $scope.gInfo);
               angular.element("#address").click();
+
+
             });
           };
           $scope.confirmByMapSelected = function () {
@@ -94,7 +215,9 @@
           }
           $scope.$on('updateGInfo', function(event, data){
             $scope.gInfo =data;
+            $scope.setCourseInfo.position = $scope.gInfo.latitude.toString()+","+$scope.gInfo.longitude.toString();
             angular.element("#address").click();
+            console.log($scope.setCourseInfo);
           });
         }])
 

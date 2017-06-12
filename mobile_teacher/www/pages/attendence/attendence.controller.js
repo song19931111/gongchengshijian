@@ -1,23 +1,79 @@
 (function () {
         'use strict';
         angular.module('starter.controllers')
-            .controller('AttendCtrl',['$scope','$ionicPopup','$ionicLoading','$state','$ionicHistory',function ($scope,$ionicPopup,$ionicLoading,$state,$ionicHistory) {
+            .controller('AttendCtrl',['$scope','$ionicPopup','$ionicLoading','$state','$ionicHistory','attendAjaxService','courseAjaxService','$interval','$rootScope','$cordovaToast',function ($scope,$ionicPopup,$ionicLoading,$state,$ionicHistory,attendAjaxService,courseAjaxService,$interval,$rootScope,$cordovaToast) {
               //下载有几牌，几列:
               $scope.imgArrSeatSrc = ['pages/attendence/img/offseat.png','pages/attendence/img/seat.png'];
-              $scope.rowCount =  6;
-              $scope.colCount = 10;
-              $scope.arrSeat = [];
-              $scope.arrSeat =[$scope.rowCount,$scope.colCount];
+
+              $scope.attendDetail = {
+                infoId:1,
+                startTime:"2016-6-10 16:40",
+                endTime:"2016-6-10 18:40",
+                seatDistribution:"0101011000",
+                seatRowCount:2,
+                position:"26.042926,119.3211243",
+                time:100,
+                courseName:"工程实践"
+              };
+              var startInterval = function () {
+                var interval_http = $interval(function () {
+                  attendAjaxService.getDistributionAndTime($scope.attendDetail.infoId).success(function (data,status,headers,config) {
+                    $scope.attendDetail.seatDistribution = data.seatDistribution;
+                    $scope.attendDetail.time = data.time;
+                  }).error(function (data,status,headers,config) {
+
+                  })
+                  console.log(1000);
+                },30000);
+                var interval_time = $interval(function () {
+                  if($scope.attendDetail.time == 0){
+                    $interval.cancel(interval_time);
+                  }
+                  $scope.attendDetail.time--;
+                },1000);
+              }
+
+
+              startInterval();
+
+              courseAjaxService.getCourseInfoLate().success(function (data,status,headers,config) {
+                if(isEmptyObject(data)){
+                  $cordovaToast.showShortTop("当前没有教师已设置的课程信息");
+                }else{
+                  $scope.attendDetail = data;
+                  //开始计时发送
+                  startInterval();
+                }
+              }).error(function (data,status,headers,config) {
+                $cordovaToast.showShortTop("网络错误");
+              })
+
+
+              $scope.rowCount =  $scope.attendDetail.seatRowCount;
+              $scope.colCount =  $scope.attendDetail.seatDistribution.length/$scope.attendDetail.seatRowCount;
+
+
+
+              $scope.arrSeat = []; //用于维护座位的显示
+              //$scope.arrSeat =[$scope.rowCount,$scope.colCount];
               for(var i =0;i<$scope.rowCount;i++){
                 $scope.arrSeat[i] = [];
                 for(var j = 0;j<$scope.colCount;j++){
-                  $scope.arrSeat[i][j] = 0;
+                  if($scope.attendDetail.seatDistribution[i*$scope.colCount+j]=="0") {
+                    $scope.arrSeat[i][j] = 0;
+                  }else{
+                    $scope.arrSeat[i][j] = 1;
+                  }
+
                 }
               }
               $scope.attendInfo = {
                 place:"",
                 longitude:"",
                 latitude:"",
+                selectedRow:"",
+                selectedCol:"",
+                positionIndex:"",
 
               };
               $scope.map = new BMap.Map("allmap");
@@ -36,7 +92,7 @@
               };
 
               //不允许签到的提示:
-              $scope.showNotAllowAttend = function() {
+               $scope.showNotAllowAttend = function() {
                 var confirmPopup = $ionicPopup.confirm({
                   title: '提示',
                   template: '您的位置距离签到位置' + $scope.distance + '米,请确定您的位置再签到'
@@ -53,27 +109,39 @@
                 });
                 confirmPopup.then(function(res) {
                   if(res) {
-                        //
+                        var info ={infoId:"",positionIndex:$scope.attendInfo.positionIndex};
                         //向服务器发送请求，告知其选中：
+                        attendAjaxService.studentAttend(info).success(function (data,status,headers,config) {
+                            if(data.error == "none"){
+                              $cordovaToast.showShortTop("签到成功");
+                            }else{
+                              $cordovaToast.showShortTop(data.error);
+                            }
 
-                        //服务器返回成功
-                          $scope.arrSeat[$scope.selectRow][$scope.selectCol] = 1;
+                        }).error(function (data,status,headers,config) {
+
+                        })
+
+                          // $scope.arrSeat[$scope.selectRow][$scope.selectCol] = 1;
                         //服务器返回失败，该座位已经被选中
                   } else {
                   }
                 });
               };
               //选中座位:
-              $scope.selectSeat = function (rol,col) {
+              $scope.selectSeat = function (row,col) {
                   //1.向服务器发送请求，更新选中的情况:
-                    //test代码：
-                      $scope.selectRow = rol;
-                      $scope.selectCol= col;
+                $scope.attendInfo.selectedRow =row;
+                $scope.attendInfo.selectedCol = col;
+                $scope.attendInfo.positionIndex = row*$scope.colCount*$scope.attendInfo.selectedRow+$scope.attendInfo.selectedCol;
+                console.log($scope.attendInfo.positionIndex);
                       var isSelect = false ;
-                      if( $scope.arrSeat[rol][col] == 1){
-                        isSelect  = true;
+                      if($scope.attendDetail.seatDistribution[$scope.attendInfo.positionIndex] == "1"){
+                        isSelect = true ;
                       }
-
+                      // if( $scope.arrSeat[rol][col] == 1){
+                      //   isSelect  = true;
+                      // }
                   // 2.如果被选中:
                   if(isSelect){
                     $scope.showSelected();
@@ -136,8 +204,9 @@
                   longitude:"",
                   minute:""
                 };
-                $scope.courseInfo. latitude= 26.042926;
-                $scope.courseInfo.longitude = 119.3211243;
+                var position = $scope.attendDetail.position.split(",");
+                $scope.courseInfo. latitude= parseFloat(position[0]);
+                $scope.courseInfo.longitude = parseFloat(position[1]);
 
 
 
@@ -145,6 +214,18 @@
 
                 // 26.042926 119.3211243
               });
+
+
+              $rootScope.$on('$stateChangeStart',
+                function(event, toState, toParams, fromState, fromParams){
+                  console.log(fromState);
+                  // transitionTo() promise will be rejected with
+                  // a 'transition prevented' error
+                  if(fromState.name =="app.attendence"){
+
+                  }
+                })
+
 
             }])
 

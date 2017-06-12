@@ -151,7 +151,7 @@
           if($scope.regInfo[key] ==""){
             $cordovaToast.showShortTop("您有信息还没有填写完全，不能提交");
           }else{
-              userAjaxService.add($scope.regInfo).success(function (data,status,headers,config) {
+              userAjaxService.addStudent($scope.regInfo).success(function (data,status,headers,config) {
                 if(data.error =="none"){
                   $cordovaToast.showShortTop('注册成功');
                   $state.go("login");

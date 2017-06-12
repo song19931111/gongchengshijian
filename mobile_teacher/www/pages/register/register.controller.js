@@ -4,16 +4,70 @@
 (function () {
   'use strict';
   angular.module('starter.controllers')
-    .controller('RegCtrl',['$scope','$interval','$http','$state','$cordovaToast',function ($scope,$interval,$http,$state,$cordovaToast) {
+    .controller('RegCtrl',['$scope','$interval','$http','$state','$cordovaToast','userAjaxService','$ionicLoading','$location','LocalStorageServices',function ($scope,$interval,$http,$state,$cordovaToast,userAjaxService,$ionicLoading,$location,LocalStorageServices) {
       $scope.codetime="获取验证码";
+      if ($location.path() == '/register') {
+        $scope.regInfo = {
+          userName: "",
+          code: "",
+          generateCode: "none",
+          tel: "",
+          password: "",
+          confirmPassword: "",
+          colleageName: "",
+          professionName: "",
+          classId: "",
+          mail: "",
+        };
+      }
+      if ($location.path() == '/register2') {
+        $scope.regInfo = LocalStorageServices.get("regInfo");
+      }
+      $scope.colleageInfo="";
+      $scope.classList = "";
+      $scope.classItem={"info":""};
+      $scope.selectedColleageInfo ={"info":""};
 
-      $scope.regInfo = {
-        code:"",
-        generateCode:"none",
-        tel:"",
-        password:"",
-        confirmPassword:"",
-      };
+      //$scope.colleageList = ["福州大学","厦门大学","哈尔滨工业大学"];
+      $scope.colleageList ="";
+      userAjaxService.getColleageName().success(function(data,status,headers,config){
+        scope.colleageList = data;
+        $ionicLoading.hide();
+      }).error(function(data,status,headers,config){
+        $ionicLoading.hide();
+        $cordovaToast.showShortTop("数据加载失败，请检查网络");
+      });
+
+
+      $scope.changeColleage =function () {
+        //清空
+        $scope.classList = "";
+        $scope.classItem={"info":""};
+        $ionicLoading.show({
+          template:'<span style="text-align:right;"><ion-spinner icon="ios" class="light"></ion-spinner>数据加载中.......</span>'
+          //template:'数据加载中，请稍后.......'
+        });
+        //console.log($scope.regInfo);
+        userAjaxService.getColleageInfoByName($scope.regInfo.colleageName).success(function(data,status,headers,config){
+          $scope.colleageInfo = data;
+          $ionicLoading.hide();
+        }).error(function(data,status,headers,config){
+          $ionicLoading.hide();
+          $cordovaToast.showShortTop("数据加载失败，请检查网络");
+        });
+      }
+      $scope.changeProfession =function () {
+       // console.log($scope.selectedColleageInfo);
+        $scope.classList =  $scope.selectedColleageInfo.info.classList;
+        $scope.regInfo.professionName = $scope.selectedColleageInfo.info.professionName;
+
+      }
+      $scope.changeClass =function () {
+        if($scope.classItem.info==""){
+          return ;
+        }
+        $scope.regInfo.classId = $scope.classItem.info.classId;
+      }
 
       var generateCode = function () {
           var Num = "";
@@ -21,9 +75,6 @@
             Num += Math.floor(Math.random() * 10);
           }
           return Num;
-      }
-      $scope.login = function () {
-        $state.go("app.home");
       }
 
       //判断一个object {} 是否为空
@@ -44,6 +95,7 @@
       $scope.goNextStep = function (error) {
         //$state.go("register2");
         if(isEmptyObject(error) && isLogin()){
+          LocalStorageServices.update("regInfo",$scope.regInfo);
           $state.go("register2");
         }
       }
@@ -92,7 +144,24 @@
         //http://sms.market.alicloudapi.com/singleSendSms?ParamString={'code':'123456'}&RecNum=18965089805&&TemplateCode=SMS_67650114'  -H 'Authorization:APPCODE 你自己的AppCode
 
       }
-
+      $scope.confirm =function () {
+        //  console.log($scope.regInfo);
+        //if($scope.regInfo.)
+        for(var key in $scope.regInfo){
+          if($scope.regInfo[key] ==""){
+            $cordovaToast.showShortTop("您有信息还没有填写完全，不能提交");
+          }else{
+              userAjaxService.addStudent($scope.regInfo).success(function (data,status,headers,config) {
+                if(data.error =="none"){
+                  $cordovaToast.showShortTop('注册成功');
+                  $state.go("login");
+                }
+              }).error(function (data,status,headers,config) {
+                $cordovaToast.showShortTop('请检查网络问题');
+              })
+          }
+        }
+      }
 
 
     }])

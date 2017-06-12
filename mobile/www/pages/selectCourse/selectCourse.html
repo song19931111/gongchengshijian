@@ -1,0 +1,23 @@
+<ion-view view-title="选择课程">
+  <ion-content>
+    <div class="list">
+
+      <div class="item" ng-repeat="item in courseList track by $index" ng-click="selectItem($index)">
+        <div class="row">
+          <div class="col-66">
+            <p>课程名称:{{item.courseName}}</p>
+            <p>任课教师:{{item.teacherName}}</p>
+            <p>时间:{{item.startTime}}&nbsp;-&nbsp;{{item.endTime}}</p>
+            <p>学时:{{item.period}}</p>
+          </div>
+          <div class="col col-33">
+            <div align="right">
+              <input type="checkbox"  name="singerCheckbox"  ng-checked="isSelected($index)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="button button-block button-energized" ng-click="confirm()">确定</button>
+  </ion-content>
+</ion-view>
