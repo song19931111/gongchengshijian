@@ -1,23 +1,35 @@
 <ion-view view-title="签到">
   <ion-content>
-    <div id="allmap" ng-show="false"></div>
+    <!--<div id="allmap" ng-show="false"></div>-->
+
     <div class="list card">
       <!--<a href="#" class="item item-icon-left" ui-sref="app.setplace">-->
         <!--<i class="icon ion-card"></i>-->
         <!--签到地点:{{attendDetail.place}}-->
       <!--</a>-->
-      <a href="#" class="item item-icon-left">
-        <i class="icon ion-card"></i>
-        课程名称:{{attendDetail.courseName}}
-      </a>
-      <a href="#" class="item item-icon-left">
-        <i class="icon ion-card"></i>
-        距离上课还有:{{attendDetail.time}}秒
-      </a>
+
+      <label class="item item-input">
+        <div class="input-label">
+          选择时间：{{datepickerObjectEnd.inputDate | date:datepickerObjectEnd.dateFormat}}
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ionic-datepicker input-obj="datepickerObjectEnd" >
+          <button class="button  button-energized">选择日期</button>
+        </ionic-datepicker>
+
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          选择您的课程
+        </div>
+        <select ng-model="attendDetail.info" ng-options="item.courseName for item in courseInfoList" ng-change="changeCourse()">
+        </select>
+      </label>
 
     </div>
     <div class="row" ng-repeat="item in arrSeat">
-      <div class="col box" ng-click="selectSeat($parent.$index,$index);" ng-repeat="subItem in item track by $index"><img ng-src="{{imgArrSeatSrc[subItem]}}">{{$parent.$index*colCount+($index+1)}}</div>
+      <div class="col box" ng-click="getAndSetStudentInfo(subItem);" ng-repeat="subItem in item track by $index"><img ng-src="{{imgArrSeatSrc[subItem.isAttend]}}">{{$parent.$index*colCount+($index+1)}}</div>
     </div>
   </ion-content>
 </ion-view>

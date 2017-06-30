@@ -177,17 +177,6 @@ mainApp.config(function ($stateProvider,$urlRouterProvider) {
 
             }
         })
-        // .state('tree', {
-        //     url: '/tree',
-        //     views: {
-        //         '': {
-        //             templateUrl: 'tpls/role/tree.html',
-        //             controller:"treeCtrl"
-        //         }
-        //
-        //     }
-        // })
-
 
     $urlRouterProvider.otherwise('login');
 });
@@ -198,7 +187,7 @@ mainApp.run(function($rootScope,permissionService,$state,LocalStorageServices,$l
         //console.log(toState);\
         $rootScope.toMenuUrl = toState.name;
         var url = toState.name;
-        var urlNoIntercept =  ['login','error'];
+        var urlNoIntercept =  ['login','error','base.index'];
         for(var i = 0;i<urlNoIntercept.length;i++){
             if(url  == urlNoIntercept[i]){
                 return ;
@@ -217,6 +206,10 @@ mainApp.run(function($rootScope,permissionService,$state,LocalStorageServices,$l
         }
     })
 })
+    .config(['$httpProvider',function ($httpProvider) {
+        $httpProvider.interceptors.push('TokenInterceptor')
+    }])
+
 // mainApp.config(function($ngBootboxConfigProvider) {
 //     //$ngBootboxConfigProvider.setDefaultLocale('sv');
 //

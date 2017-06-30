@@ -2,12 +2,18 @@
  * Created by xiangsong on 2017/4/4.
  */
 angular.module('mainApp')
-    .factory('roleAjaxService',['BaseAjaxService',function (BaseService) {
+    .factory('roleAjaxService',['BaseAjaxService','PAGE_SIZE','DOMAIN','$http',function (BaseService,PAGE_SIZE,DOMAIN,$http){
         var service ={};
         service = Object.create(BaseService);
-        service.moduleName = 'role.json';
-        service.getByCategoryID = function (categoryID) {
+        service.moduleName = 'role';
+        service.addRolePower = function (data) {
+            return $http({
+                method:'POST'
+                ,url:DOMAIN + this.moduleName+"addRolePower",
+                data:angular.toJson(data)
+            })
+        }
 
-        };
+
         return service;
     }]);

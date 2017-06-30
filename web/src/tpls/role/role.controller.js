@@ -4,13 +4,13 @@
     angular.module('mainApp')
         .controller('RoleCtrl',['$scope','roleAjaxService','$uibModal','$state','LocalStorageServices',
             function ($scope,roleAjaxService,$uibModal,$state,LocalStorageServices) {
-            var GetAllUser = function () {
+            var GetAllRole = function () {
 
                 var postData = {
                     pageIndex: $scope.paginationConf.currentPage,
                     pageSize: $scope.paginationConf.itemsPerPage
                 }
-                //获取所有的用户
+                //获取所有的权限信息
                 roleAjaxService.getList($scope.currentPage).then(function (result) {
                     console.log("aaaaa"+$scope.roleList);
                     $scope.paginationConf.totalItems = result.data.total;
@@ -33,7 +33,7 @@
              当页码和页面记录数发生变化时监控后台查询
              如果把currentPage和itemsPerPage分开监控的话则会触发两次后台事件。
              ***************************************************************/
-            $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllUser);
+            $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllRole);
             //对话框的打开方法
 
 
@@ -64,7 +64,15 @@
             ///////////////////////////////////////新增角色//////////////////////////////////////////////
             $scope.add = function (item) {
                 console.log(item);
-                roleAjaxService.add(item);
+                roleAjaxService.add(item).then(function (result) {
+                    if(result.data.error =="none"){
+                        alert("新增角色成功");
+                    }else{
+                        alert(result.data.error);
+                    }
+                }).catch(function (result) {
+                    alert("新增角色失败");
+                })
 
             }
             ///////////////////////////////////////新增角色End//////////////////////////////////////////////
@@ -72,21 +80,57 @@
 
 
 
-            ///////////////////////////////////////修改用户//////////////////////////////////////////////
+            ///////////////////////////////////////修改角色//////////////////////////////////////////////
             $scope.modify = function (item) {
                 console.log(item);
-                roleAjaxService.modify(item);
+                roleAjaxService.modify(item).then(function (result) {
+                    if(result.data.error =="none"){
+                        GetAllRole();
+                        alert("修改角色成功");
+                    }else{
+                        alert(result.data.error);
+                    }
+                }).catch(function (result) {
+                    alert("修改角色失败");
+                });
             }
             ///////////////////////////////////////修改用户End//////////////////////////////////////////////
 
             ///////////////////////////////////////删除用户Start//////////////////////////////////////////////
             $scope.delete = function (){
                 console.log("删除"+$scope.selected);
-                roleAjaxService.add($scope.selected);
+                roleAjaxService.delete($scope.selected).then(function (result) {
+                    if(result.data.error=="none"){
+                        GetAllRole();
+                        alert("删除成功");
+
+                    }
+                }).catch(function (result) {
+                    alert("删除失败");
+                })
 
             }
 
             ///////////////////////////////////////删除用户End//////////////////////////////////////////////
+                //提交修改的权限信息
+                var  modifyRolePowerInfo =function (item) {
+                    var postInfo={type:"",menuIdList:[],roleId:""};
+                   // a = {type:"select","menuIdList":["1","2","3","4","5"],roleId:1};
+                    postInfo.type = item.type;
+                    postInfo.menuIdList = postInfo.selectedMenuId;
+                    postInfo.roleId = item.roleId;
+                    roleAjaxService.addRolePower(postInfo).then(function (result) {
+                        if(result.data.error=="none"){
+                            GetAllRole();
+                            alert("修改权限成功");
+
+                        }else{
+                            alert(result.data.error);
+                        }
+                    }).catch(function (result) {
+                        alert("修改权限失败");
+                    })
+                }
             ///////////////////////////////////////对话框Start//////////////////////////////////////////////
             $scope.animationsEnabled = true;
             $scope.open = function (size,item) {
@@ -134,30 +178,14 @@
 
                     modalMenuInstance.result.then(function (item) {//这是一个接收模态框返回值的函数
                         $scope.item = item;//模态框的返回值
-                        console.log(item);
+                        //console.log(item);
+                      modifyRolePowerInfo($scope.item);
                         //
                     }, function () {
                         // $log.info('Modal dismissed at: ' + new Date());
                     });
 
                 };
-            //
-            // $scope.toSetAuthority = function (roleid) {
-            //     $state.go('base.index.power',{id:roleid,isUser:false});
-            // };
-
-            // $scope.jumpToUrl = function(path) {
-            //
-            //     $location.path(path);
-            //     var curUrl = $location.absUrl();
-            //     console.log(curUrl);
-            //
-            // };
-
-            // $scope.$storage = $localStorage.$default({
-            //     counter: 0
-            // });
-
 
             $scope.toggleAnimation = function () {
                 $scope.animationsEnabled = !$scope.animationsEnabled;//动画效果
@@ -266,6 +294,7 @@
                 //close函数是在模态框关闭后调用的函数,他会将这个参数传到主控制器的results函数中,作为回调值
 
                 $scope.items['selectedMenuId'] = $scope.treeInstance.jstree(true).get_selected();
+             //   console.log($scope.items['selectedMenuId']);
                 $uibModalInstance.close($scope.items);
             };
 
@@ -281,7 +310,7 @@
                 alert('code here');
             }
             $scope.$on('$viewContentLoaded', function(){
-                console.log("123213");
+                //console.log("123213");
                 $scope.items['selectedMenuId'] = $scope.treeInstance.jstree(true).get_selected();
             });
 

@@ -14,7 +14,7 @@ angular.module('mainApp')
     }
     service.setPermission = function ( _permission ) {
         permission =  _permission;
-        $rootScope.$broadcast('permissionsChanged');
+        //$rootScope.$broadcast('permissionsChanged');
     }
     service.isPermission = function (menuId,powerType) {
 
@@ -26,10 +26,6 @@ angular.module('mainApp')
             }
             return false ;
         }
-
-
-
-
         if(powerType =='add'){
             if(isContainValue(permission.addPower,menuId)){
                 return true ;
@@ -50,7 +46,6 @@ angular.module('mainApp')
             if(isContainValue(permission.menuPower,menuId)){
                 return true ;
             }
-            //get权限
         }
         return false;
     }

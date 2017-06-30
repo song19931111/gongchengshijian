@@ -11,7 +11,7 @@ angular.element(document).ready(function() {
   // })
   console.log("进行权限查询");
 })
-angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.services','ngMessages','ngAnimate'])
+angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.services','ngMessages','ionic-datepicker'])
 .run(function($ionicPlatform,$ionicPopup,$location,$ionicHistory,$rootScope,$cordovaToast) {
 
 

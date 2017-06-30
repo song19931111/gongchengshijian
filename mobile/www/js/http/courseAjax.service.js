@@ -9,13 +9,13 @@ angular.module('starter.services')
     service.getInfoByProfessionName =function (name) {
       return $http({
         method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getInfoByProfessionName"
+        ,url:DOMAIN + this.moduleName+"getInfoByProfessionName"
       });
     }
     service.addSelectedCourse =function (cIdList) {
       return $http({
         method:'POST'
-        ,url:DOMAIN + this.moduleName+"/addSelectedCourse"
+        ,url:DOMAIN + this.moduleName+"addSelectedCourse"
         ,data:angular.toJson(cIdList)
       });
     }
@@ -34,9 +34,36 @@ angular.module('starter.services')
       //得到该生距离当前时间最近一门课的信息
       return $http({
         method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getCourseInfoLate"
+        ,url:DOMAIN + this.moduleName+"getCourseInfoLate"
       });
     }
+    service.getCourseInfoTodayByTid = function () {
+      return $http({
+        method:'GET'
+        ,url:DOMAIN + this.moduleName+"getCourseInfoTodayByTid"
+      });
+    }
+
+    service.setCourseInfo = function (info) {
+      //教师设置课程的信息
+      return $http({
+        method:'POST'
+        ,url:DOMAIN + this.moduleName+"setCourseInfo",
+        data:angular.toJson(info),
+
+      });
+    }
+    service.getCourseInfoByDayAndTid = function (setDate) {
+        //教师设置课程的信息
+        return $http({
+          method:'GET'
+          ,url:DOMAIN + this.moduleName+"getCourseInfoByDayAndTid",
+          params:{
+            date:setDate
+          }
+
+        });
+      }
 
     return service;
   }])

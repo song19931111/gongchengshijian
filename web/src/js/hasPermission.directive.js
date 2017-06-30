@@ -9,7 +9,6 @@ angular.module('mainApp').directive('hasPermission',['permissionService',functio
         link: function(scope, element, attrs) {
             if(!_.isString(attrs.hasPermission))
                 throw "hasPermission value must be a string";
-
             var value = attrs.hasPermission.trim();
             //判断是否有权限
             var notPermissionFlag = value[0] === '!';

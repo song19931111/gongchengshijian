@@ -5,7 +5,15 @@
     'use strict';
     angular.module('mainApp')
         .controller('headCtrl',['$scope','LocalStorageServices','$state',function ($scope,LocalStorageServices,$state) {
+            $scope.colleapse = function () {
+                if(angular.element(".sidebar-menu").hasClass("collapsed")){
+                    angular.element(".sidebar-menu").removeClass("collapsed");
+                }else{
+                    angular.element(".sidebar-menu").addClass("collapsed");
+                }
 
+            }
+            
             $scope.user = LocalStorageServices.get("user",null);
             if($scope.user == null){
                 $state.go('login');

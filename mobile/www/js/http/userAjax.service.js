@@ -11,38 +11,36 @@ angular.module('starter.services')
     service.addStudent = function (data) {
       return $http({
         method:'POST'
-        ,url:DOMAIN + this.moduleName+"/addStudent"
+        ,url:DOMAIN + this.moduleName+"addStudent"
         ,
         data:angular.toJson(data)
       });
     };
-    service.getByTel = function (telphone) {
+    service.getByTel = function (info) {
       return $http({
-        method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getByTel"
-        ,params:{
-          tel:telphone
-        }
+        method:'POST'
+        ,url:DOMAIN + this.moduleName+"getByTel",
+        data:angular.toJson(info)
       });
     };
     service.getByTelAndPass = function (info) {
       return $http({
         method:'POST'
-        ,url:DOMAIN + this.moduleName+"/getByTelAndPass",
-        data:angular.json(info)
+        ,url:DOMAIN + this.moduleName+"getByTelAndPass",
+        data:angular.toJson(info)
       });
     };
-    service.getColleageName = function () {
+    service.getAllColleageName = function () {
       return $http({
         method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getColleageName",
+        ,url:DOMAIN + this.moduleName+"getAllColleageName",
       });
     };
 
     service.getColleageInfoByName =function (name) {
       return $http({
         method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getColleageInfoByName"
+        ,url:DOMAIN + this.moduleName+"getColleageInfoByName"
         ,params:{
           colleageName:name
         }

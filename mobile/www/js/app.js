@@ -205,4 +205,7 @@ angular.module('starter', ['ionic','ngCordova','starter.controllers','starter.se
     })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
-});
+})
+.config(['$httpProvider',function ($httpProvider) {
+  $httpProvider.interceptors.push('TokenInterceptor')
+}])

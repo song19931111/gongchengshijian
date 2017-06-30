@@ -22,7 +22,7 @@
         img: 'pages/welcome/img/w1_.jpg'
       }, {
         top: '介绍2',
-        img: 'pages/welcome/intro/intro1.jpg',
+        img: 'pages/welcome/intro/w1.jpg',
       }, {
         top: '介绍3',
         img: 'pages/welcome/img/w1_.jpg',

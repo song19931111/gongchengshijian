@@ -98,8 +98,11 @@
                   var requestInfo ={"password":"","tel":""};
                   //采用验证码登陆
                     if($scope.userInfo.code !="" &&$scope.userInfo.code == $scope.userInfo.generateCode){
-                      userAjaxService.getByTel($scope.userInfo.tel).success(function (data,status,headers,config) {
+                      var postInfo = {"tel":"","status":"teacher"};
+                      postInfo.tel = $scope.userInfo.tel;
+                      userAjaxService.getByTel(postInfo).success(function (data,status,headers,config) {
                         if(data.total == 1){
+                          localStorage.update("Token",data.Token);
                           $state.go('app.home');
                         }else{
                           $cordovaToast.showShortTop("没有这个用户");
@@ -110,8 +113,10 @@
                   }else{
                       requestInfo.tel = $scope.userInfo.tel;
                       requestInfo.password =$scope.userInfo.password;
+                      requestInfo['status']="teacher";
                       userAjaxService.getByTelAndPass(requestInfo).success(function (data,status,headers,config) {
                         if(data.total == 1){
+                          localStorage.update("Token",data.Token);
                           $state.go('app.home');
                         }else{
                           $cordovaToast.showShortTop("用户名或者密码错误");

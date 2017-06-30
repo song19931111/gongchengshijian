@@ -55,7 +55,31 @@
         <div class="form-group">
             <label for="mail" class="col-sm-2 control-label">角色</label>
             <div class="col-sm-6">
-                <select class="form-control" ng-model="item.role" ng-options="role for role in rolelist">
+                <select class="form-control" ng-model="roleItem.info" ng-options="role.roleName for role in rolelist">
+                </select>
+            </div>
+        </div>
+        <!--学校-->
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">学校</label>
+            <div class="col-sm-6">
+                <select ng-model="item.colleageName" ng-options="name for name in colleageList" ng-change="changeColleage()">
+                </select>
+            </div>
+        </div>
+        <!--专业-->
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">专业</label>
+            <div class="col-sm-6">
+                <select ng-model="selectedColleageInfo.info" ng-options="item.professionName for item in colleageInfo" ng-change="changeProfession()">
+                </select>
+            </div>
+        </div>
+        <!--班级-->
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">班级</label>
+            <div class="col-sm-6">
+                <select ng-model="classItem.info" ng-options="item.className for item in classList" ng-change="changeClass();">
                 </select>
             </div>
         </div>

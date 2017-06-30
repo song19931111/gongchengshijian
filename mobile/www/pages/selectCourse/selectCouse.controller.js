@@ -6,44 +6,47 @@
           //获取比当前日期晚,并没有选的课程列表:
 
           courseAjaxService.getInfoByProfessionName().success(function (data,status,headers,config) {
-            $scope.courseList =data;
+            $scope.courseList =data.courselist;
+            for(var i=0;i<$scope.courseList.length;i++){
+              $scope.courseList[i]['teacherName'] = $scope.courseList[i].teacher.userId.userName;
+            }
           }).error(function (data,status,headers,config) {
-            $cordovaToast.showShortTop("选课成功");
+            $cordovaToast.showShortTop("错误");
           })
 
           $scope.courseList =[
-            {
-              cId:"1",
-              courseName:"语文",
-              teacherName:"哈哈",
-              startTime:"2016-6-7",
-              endTime:"2016-7-7",
-              period:32
-            },
-            {
-              cId:"2",
-              courseName:"语文1",
-              teacherName:"哈哈",
-              startTime:"2016-6-7",
-              endTime:"2016-7-7",
-              period:32
-            },
-            {
-              cId:"3",
-              courseName:"语文2",
-              teacherName:"哈哈",
-              startTime:"2016-6-7",
-              endTime:"2016-7-7",
-              period:32
-            },
-            {
-              cId:"4",
-              courseName:"语文3",
-              teacherName:"哈哈",
-              startTime:"2016-6-7",
-              endTime:"2016-7 -7",
-              period:32
-            }
+            // {
+            //   cId:"1",
+            //   courseName:"语文",
+            //   teacherName:"哈哈",
+            //   startTime:"2016-6-7",
+            //   endTime:"2016-7-7",
+            //   period:32
+            // },
+            // {
+            //   cId:"2",
+            //   courseName:"语文1",
+            //   teacherName:"哈哈",
+            //   startTime:"2016-6-7",
+            //   endTime:"2016-7-7",
+            //   period:32
+            // },
+            // {
+            //   cId:"3",
+            //   courseName:"语文2",
+            //   teacherName:"哈哈",
+            //   startTime:"2016-6-7",
+            //   endTime:"2016-7-7",
+            //   period:32
+            // },
+            // {
+            //   cId:"4",
+            //   courseName:"语文3",
+            //   teacherName:"哈哈",
+            //   startTime:"2016-6-7",
+            //   endTime:"2016-7 -7",
+            //   period:32
+            // }
           ]
 
 

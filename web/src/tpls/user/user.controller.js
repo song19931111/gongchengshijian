@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular.module('mainApp')
-        .controller('UserCtrl',['$scope','userAjaxService','$uibModal','$state','$ngBootbox',function ($scope,userAjaxService,$uibModal,$state,$ngBootbox) {
+        .controller('UserCtrl',['$scope','userAjaxService','$uibModal','$state','$ngBootbox','roleAjaxService',function ($scope,userAjaxService,$uibModal,$state,$ngBootbox,roleAjaxService) {
 
             $scope.onSortChange = function(orderBy,asc){
                 console.log(orderBy,asc);
@@ -48,7 +48,6 @@
 
         };
 
-
             var GetAllUser = function () {
 
                 var postData = {
@@ -56,13 +55,13 @@
                     pageSize: $scope.paginationConf.itemsPerPage
                 }
                 //获取所有的用户
-                userAjaxService.getList($scope.currentPage).then(function (result) {
+                userAjaxService.getList($scope.paginationConf.currentPage).then(function (result) {
                         console.log(result);
                     console.log(result.data.total);
                          $scope.paginationConf.totalItems = result.data.total;
                          $scope.userList = result.data.userList;
                 }).catch(function (data) {
-                    console.log('error');
+                    alert("网络错误");
                 });
 
 
@@ -112,14 +111,25 @@
 
             $scope.setPower = function (userid) {
 
-                $state.go('base.index.power',{id:userid,isUser:true});
+               // $state.go('base.index.power',{id:userid,isUser:true});
 
             }
 
 
             ///////////////////////////////////////新增用户//////////////////////////////////////////////
             $scope.add = function (item) {
-                    console.log("新增"+item);
+                //console.log("新增"+item);
+                userAjaxService.add(item).then(function (result) {
+                    if(result.data.error == "none"){
+                        GetAllUser();
+                        alert("添加成功");
+
+                    }else{
+                        alert(result.data.error);
+                    }
+                }).catch(function (result) {
+                    alert("添加失败");
+                })
 
             }
             ///////////////////////////////////////新增用户End//////////////////////////////////////////////
@@ -129,7 +139,17 @@
 
             ///////////////////////////////////////修改用户//////////////////////////////////////////////
             $scope.modify = function (item) {
-                console.log("修改"+item);
+               // console.log("修改"+item);
+                userAjaxService.modify(item).then(function (result) {
+                    if(result.data.error=="none"){
+                        GetAllUser();
+                        alert("修改成功");
+                    }else{
+                        alert(result.data.error);
+                    }
+                }).catch(function (result) {
+                    alert("修改失败");
+                })
 
             }
             ///////////////////////////////////////修改用户End//////////////////////////////////////////////
@@ -140,9 +160,19 @@
               //  $ngBootbox.addLocale()
                 $ngBootbox.confirm('确认要删除吗?')
                     .then(function() {
-                        console.log('Confirmed!');
+                       // console.log('Confirmed!');
+                            userAjaxService.delete($scope.selected).then(function (result) {
+                                if(result.data.error == "none"){
+                                    GetAllUser();
+                                    alert("删除成功");
+                                }else{
+                                    alert(result.data.error);
+                                }
+                            }).catch(function (result) {
+                                alert("删除失败");
+                            })
                     }, function() {
-                        console.log('Confirm dismissed!');
+                        //console.log('Confirm dismissed!');
                     });
 
             }
@@ -187,24 +217,183 @@
 
 
         }])
-        .controller('ModalInstanceCtrlUser', function ($scope, $uibModalInstance, items) {
+        .controller('ModalInstanceCtrlUser', function ($scope,$uibModalInstance,userAjaxService,roleAjaxService,items) {
 //这是模态框的控制器,记住$uibModalInstance这个是用来调用函数将模态框内的数据传到外层控制器中的,items则上面所说的入参函数,它可以获取到外层主控制器的参数
-        $scope.item = items;//这里就可以去外层主控制器的数据了
+        $scope.item =  angular.copy(items);//这里就可以去外层主控制器的数据了
         var $ctrl = this;
            //要用深复制
+            $scope.colleageInfo="";
+            $scope.colleageList=[];
+            $scope.roleItem={"info":""};
+            $scope.classList = "";
+            $scope.classItem={"info":""};
+            $scope.selectedColleageInfo ={"info":""};
 
             if($scope.item == 'none'){
-                $scope.title = "新增用户";
-                $scope.item = {"username":"","tel":'',"mail":"","type":"add"};
+                //如果是新增用户
+                roleAjaxService.getAll().then(function (result) {
+                    $scope.rolelist = result.data.rolelist;
+                        userAjaxService.getAllColleageName().then(function (result) {
+                            $scope.colleageList  =result.data.colleagelist;
+                            initData();
+                        }).catch(function (result) {
+                            alert("获取学院信息失败");
+                        })
+                    }).catch(function (result) {
+                    alert("获取角色名失败");
+                })
+
             }else{
-                $scope.title = "修改用户";
-                $scope.item['type'] ="modify";
+                //如果是修改用户:
+                userAjaxService.getUserOtherInfo($scope.item.userId).then(function (result) {
+                    //获取用户的其他信息:
+                    var userId = $scope.item.userId;
+                    $scope.item = result.data.userInfo;
+                    $scope.item.tel = parseInt($scope.item.tel);
+                    $scope.item['userId']=userId;
+                    $scope.item['password']="";
+                    if(isEmptyObject(result.data)){
+                        alert("获取用户信息失败");
+                        return;
+                    }
+                    //获取角色列表
+
+                    roleAjaxService.getAll().then(function (result) {
+                        $scope.rolelist = result.data.rolelist;
+                        //获取学校列表
+                        if($scope.item.colleageName==""){
+                            //管理员没有学校列表
+                            return ;
+                        }
+                        userAjaxService.getAllColleageName().then(function (result) {
+                            $scope.colleageList  =result.data.colleagelist;
+                            //获取学院信息详细列表：
+                            userAjaxService.getColleageInfoByName($scope.item.colleageName).then(function(result){
+                                $scope.colleageInfo = result.data.colleageinfo;
+                                $scope.item['type']="modify";
+                                initData();
+                            }).catch(function(result){
+                                alert("请求学院专业列表失败");
+                            });
+                        }).catch(function (data) {
+                            alert("获取学院信息失败 ");
+                        })
+
+                        }).catch(function (data) {
+                            alert("获取角色失败");
+                        })
+                    }).catch(function (result) {
+                    alert("获取用户详细信息失败");
+                    })
+
             }
-        $scope.rolelist = ["教师","学生"];
+
+
+            var initData = function () {
+                if($scope.item == 'none'){
+                    $scope.title = "新增用户";
+                    $scope.item = {"username":"","tel":'',"mail":"","type":"add"};
+                }else{
+                    // $scope.colleageInfo =[
+                    //     {"professionName":"数学与计算机","classList":[{"classId":1,"name":"计算机技术1班"},{"classId":2,"name":"计算机技术2班"}]},
+                    //     {"professionName":"英语","classList":[{"classId":3,"name":"英语1班"},{"classId":4,"name":"英语2班"}]}
+                    // ]
+                    //$scope.rolelist = [{"roleId":1,"roleName":"教师"},{"roleId":2,"roleName":"管理员"}];
+                    $scope.title = "修改用户";
+                    $scope.item['type'] ="modify";
+                    //$scope.item['colleageName']="福州大学";
+                    //判断角色是第几项:
+                    var roleIndex = -1 ;
+                    for(var i=0;i<$scope.rolelist.length;i++){
+                        if($scope.item.roleId == $scope.rolelist[i].roleId){
+                            roleIndex = i ;
+                        }
+                    }
+                    //判断学校是第几项:
+                    var colleageIndex =  -1;
+                    for(var i=0;i<$scope.colleageList;i++){
+                        if($scope.item.colleageName == $scope.colleageList[i]){
+                            colleageIndex =  i;
+                        }
+                    }
+                    var professionIndex = -1 ;
+                    //判断学院信息是第几项:
+                    for(var i=0;i<$scope.colleageInfo.length;i++){
+                        if($scope.item.professionName == $scope.colleageInfo[i].professionName){
+                            professionIndex = i;
+                        }
+                    }
+                    //判断班级是第几项:
+                    var classIndex = -1 ;
+                    for(var i=0;i<$scope.colleageInfo[professionIndex].classList.length;i++){
+                        if($scope.item.classId == $scope.colleageInfo[professionIndex].classList[i].calssID){
+                            classIndex = i ;
+                        }
+                    }
+                    $scope.roleItem.info =$scope.rolelist[roleIndex];
+                    $scope.selectedColleageInfo.info =  $scope.colleageInfo[professionIndex];
+                    $scope.classList = $scope.selectedColleageInfo.info.classList;
+                    $scope.classItem.info = $scope.selectedColleageInfo.info.classList[classIndex];
+                }
+            }
 
 
 
-        $scope.ok = function () {
+
+
+          //  $scope.rolelist = [{"roleId":1,"roleName":"教师"},{"roleId":2,"roleName":"管理员"}];
+            //$scope.item['colleageName']="福州大学";
+          //  请求学校列表
+          //   userAjaxService.getColleageName().then(function (result) {
+          //       $scope.colleageList  =result.data;
+          //   }).catch(function (data) {
+          //       alert("请求学院列表失败");
+          //   })
+          //   roleAjaxService.getAll().then(function (result) {
+          //
+          //   }).catch(function (data) {
+          //       alert("获取角色列表失败 ");
+          //   })
+
+            //学校 学院 班级 ngChange
+
+            $scope.changeColleage =function () {
+                $scope.classItem={"info":""};
+
+                // $scope.colleageInfo =[
+                //     {"professionName":"数学与计算机","classList":[{"classId":1,"name":"计算机技术1班"},{"classId":2,"name":"计算机技术2班"}]},
+                //     {"professionName":"英语","classList":[{"classId":3,"name":"英语1班"},{"classId":4,"name":"英语2班"}]}
+                // ]
+                userAjaxService.getColleageInfoByName($scope.item.colleageName).then(function(result){
+                    $scope.colleageInfo = result.data.colleageinfo;
+                }).catch(function(result){
+                    //请求学院专业列表
+                    alert("请求学院专业列表失败");
+                });
+            }
+            $scope.changeProfession =function () {
+                // console.log($scope.selectedColleageInfo);
+                $scope.classList =  $scope.selectedColleageInfo.info.classList;
+                $scope.item.professionName = $scope.selectedColleageInfo.info.professionName;
+
+            }
+
+            $scope.changeClass =function () {
+                if($scope.classItem.info==""){
+                    return ;
+                }
+                $scope.item.classId = $scope.classItem.info.classId;
+                //console.log($scope.item);
+            }
+
+
+
+
+
+
+                $scope.ok = function () {
+                    $scope.item.roleId = $scope.roleItem.info.roleId;
+                console.log($scope.item);
             //close函数是在模态框关闭后调用的函数,他会将这个参数传到主控制器的results函数中,作为回调值
             $uibModalInstance.close($scope.item);
         };

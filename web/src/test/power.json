@@ -15,12 +15,5 @@
   {"id":1,"username":"song","tel":123213123,"mail":"xxx@qq.com","role":"学生","createPeople":"aaa","createTime":"2017-4-3","modifyPeople":"ccc","modifyTime":"2017-4-3"},
   {"id":1,"username":"song","tel":123213123,"mail":"xxx@qq.com","role":"学生","createPeople":"aaa","createTime":"2017-4-3","modifyPeople":"ccc","modifyTime":"2017-4-3"}
 ],"powerList":[
-  {"id":"1","powerName":"createClass","powerFullName":"创建班级","checked":"0"},
-  {"id":"2","powerName":"managerClass","powerFullName":"班级管理","checked":"1"},
-  {"id":"3","powerName":"managerStudent1","powerFullName":"学生管理","checked":"0"},
-  {"id":"3","powerName":"managerStudent2","powerFullName":"角色管理","checked":"0"},
-  {"id":"3","powerName":"managerStudent3","powerFullName":"权限管理","checked":"0"},
-  {"id":"3","powerName":"managerStudent","powerFullName":"查看个人信息","checked":"0"},
-  {"id":"3","powerName":"managerStudent","powerFullName":"查看班级信息","checked":"0"},
-  {"id":"3","powerName":"managerStudent","powerFullName":"查看所有信息","checked":"0"}
+  {"id":"1","powerName":"createClass","powerFullName":"教师端权限","checked":"0"}
 ]}

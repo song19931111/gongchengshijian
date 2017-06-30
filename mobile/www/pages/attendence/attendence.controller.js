@@ -15,6 +15,18 @@
                 time:100,
                 courseName:"工程实践"
               };
+              //获取学生是否签到:
+              $scope.studentAttendInfo ={
+                isAttend:false,
+                attendPosition:10
+              };
+
+
+
+
+
+
+
               var startInterval = function () {
                 var interval_http = $interval(function () {
                   attendAjaxService.getDistributionAndTime($scope.attendDetail.infoId).success(function (data,status,headers,config) {
@@ -23,7 +35,7 @@
                   }).error(function (data,status,headers,config) {
 
                   })
-                  console.log(1000);
+                  //console.log(1000);
                 },30000);
                 var interval_time = $interval(function () {
                   if($scope.attendDetail.time == 0){
@@ -34,39 +46,53 @@
               }
 
 
-              startInterval();
+              //startInterval();
 
               courseAjaxService.getCourseInfoLate().success(function (data,status,headers,config) {
                 if(isEmptyObject(data)){
                   $cordovaToast.showShortTop("当前没有教师已设置的课程信息");
                 }else{
-                  $scope.attendDetail = data;
-                  //开始计时发送
-                  startInterval();
+                  $scope.attendDetail = data.course;
+                  //////排座位////////////////////////
+                  $scope.rowCount =  $scope.attendDetail.seatRowCount;
+                  $scope.colCount =  $scope.attendDetail.seatDistribution.length/$scope.attendDetail.seatRowCount;
+
+                  $scope.arrSeat = []; //用于维护座位的显示
+                  //$scope.arrSeat =[$scope.rowCount,$scope.colCount];
+                  for(var i =0;i<$scope.rowCount;i++){
+                    $scope.arrSeat[i] = [];
+                    for(var j = 0;j<$scope.colCount;j++){
+                      if($scope.attendDetail.seatDistribution[i*$scope.colCount+j]=="0") {
+                        $scope.arrSeat[i][j] = 0;
+                      }else{
+                        $scope.arrSeat[i][j] = 1;
+                      }
+
+                    }
+                  }
+                  //////排座位-end////////////////////////
+                  attendAjaxService.getStudentAttendInfo($scope.attendDetail.infoId).success(function (data,status,headers,config) {
+                    if(isEmptyObject(data)){
+                      $cordovaToast.showShortTop("错误,返回的数据为空");
+                      return ;
+                    }
+                    $scope.studentAttendInfo = data;
+                    //开始计时发送
+                    startInterval();
+                  }).error(function (data,status,headers,config) {
+
+                  })
+
+
+
+
                 }
               }).error(function (data,status,headers,config) {
                 $cordovaToast.showShortTop("网络错误");
               })
 
 
-              $scope.rowCount =  $scope.attendDetail.seatRowCount;
-              $scope.colCount =  $scope.attendDetail.seatDistribution.length/$scope.attendDetail.seatRowCount;
 
-
-
-              $scope.arrSeat = []; //用于维护座位的显示
-              //$scope.arrSeat =[$scope.rowCount,$scope.colCount];
-              for(var i =0;i<$scope.rowCount;i++){
-                $scope.arrSeat[i] = [];
-                for(var j = 0;j<$scope.colCount;j++){
-                  if($scope.attendDetail.seatDistribution[i*$scope.colCount+j]=="0") {
-                    $scope.arrSeat[i][j] = 0;
-                  }else{
-                    $scope.arrSeat[i][j] = 1;
-                  }
-
-                }
-              }
               $scope.attendInfo = {
                 place:"",
                 longitude:"",
@@ -76,7 +102,7 @@
                 positionIndex:"",
 
               };
-              $scope.map = new BMap.Map("allmap");
+              //$scope.map = new BMap.Map("allmap");
                 //确认对话框:
               $scope.showSelected = function() {
                 var confirmPopup = $ionicPopup.confirm({
@@ -114,6 +140,7 @@
                         attendAjaxService.studentAttend(info).success(function (data,status,headers,config) {
                             if(data.error == "none"){
                               $cordovaToast.showShortTop("签到成功");
+                              $scope.studentAttendInfo.isAttend = true ;
                             }else{
                               $cordovaToast.showShortTop(data.error);
                             }
@@ -130,11 +157,15 @@
               };
               //选中座位:
               $scope.selectSeat = function (row,col) {
+                if($scope.studentAttendInfo.isAttend){
+                  $cordovaToast.showShortTop("您已经签到，签到的位置是"+$scope.studentAttendInfo.attendPosition)
+                }
                   //1.向服务器发送请求，更新选中的情况:
                 $scope.attendInfo.selectedRow =row;
                 $scope.attendInfo.selectedCol = col;
                 $scope.attendInfo.positionIndex = row*$scope.colCount*$scope.attendInfo.selectedRow+$scope.attendInfo.selectedCol;
-                console.log($scope.attendInfo.positionIndex);
+               // console.log($scope.attendInfo.positionIndex);
+
                       var isSelect = false ;
                       if($scope.attendDetail.seatDistribution[$scope.attendInfo.positionIndex] == "1"){
                         isSelect = true ;
@@ -171,6 +202,9 @@
                   // $scope.attendInfo.place = result.address;
                       $ionicLoading.hide();
                   //计算与正确签到位置的距离
+                  var position = $scope.attendDetail.position.split(",");
+                  $scope.courseInfo. latitude= parseFloat(position[0]);
+                  $scope.courseInfo.longitude = parseFloat(position[1]);
                   var point1 = new BMap.Point(data.longitude,data.latitude);
                   var point2 = new BMap.Point($scope.courseInfo.longitude,$scope.courseInfo.latitude);
                   $scope.distance = BMapLib.GeoUtils.getDistance(point1, point2);
@@ -204,9 +238,9 @@
                   longitude:"",
                   minute:""
                 };
-                var position = $scope.attendDetail.position.split(",");
-                $scope.courseInfo. latitude= parseFloat(position[0]);
-                $scope.courseInfo.longitude = parseFloat(position[1]);
+                // var position = $scope.attendDetail.position.split(",");
+                // $scope.courseInfo. latitude= parseFloat(position[0]);
+                // $scope.courseInfo.longitude = parseFloat(position[1]);
 
 
 

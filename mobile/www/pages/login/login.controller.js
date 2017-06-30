@@ -2,7 +2,7 @@
         'use strict';
         angular.module('starter.controllers')
             .controller('LoginCtrl',['$scope','$interval','$state','$cordovaToast',
-              '$http',function ($scope,$interval,$state,$cordovaToast,$http) {
+              '$http','userAjaxService','LocalStorageServices',function ($scope,$interval,$state,$cordovaToast,$http,userAjaxService,LocalStorageServices) {
             $scope.userInfo = {
               tel:"",
               password:"",
@@ -98,8 +98,12 @@
                   var requestInfo ={"password":"","tel":""};
                   //采用验证码登陆
                     if($scope.userInfo.code !="" &&$scope.userInfo.code == $scope.userInfo.generateCode){
-                      userAjaxService.getByTel($scope.userInfo.tel).success(function (data,status,headers,config) {
-                        if(data.total == 1){
+                      var postInfo = {"tel":"","status":"学生"};
+                      postInfo.tel = $scope.userInfo.tel;
+
+                      userAjaxService.getByTel(postInfo).success(function (data,status,headers,config) {
+                        if(data.error == "none"){
+                          LocalStorageServices.update("token",data.token);
                           $state.go('app.home');
                         }else{
                           $cordovaToast.showShortTop("没有这个用户");
@@ -110,8 +114,10 @@
                   }else{
                       requestInfo.tel = $scope.userInfo.tel;
                       requestInfo.password =$scope.userInfo.password;
+                      requestInfo['status']="学生";
                       userAjaxService.getByTelAndPass(requestInfo).success(function (data,status,headers,config) {
-                        if(data.total == 1){
+                        if(data.error == "none"){
+                          LocalStorageServices.update("token",data.token);
                           $state.go('app.home');
                         }else{
                           $cordovaToast.showShortTop("用户名或者密码错误");

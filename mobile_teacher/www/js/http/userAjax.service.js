@@ -16,13 +16,11 @@ angular.module('starter.services')
         data:angular.toJson(data)
       });
     };
-    service.getByTel = function (telphone) {
+    service.getByTel = function (info) {
       return $http({
-        method:'GET'
-        ,url:DOMAIN + this.moduleName+"/getByTel"
-        ,params:{
-          tel:telphone
-        }
+        method:'POST'
+        ,url:DOMAIN + this.moduleName+"/getByTel",
+        data:angular.toJson(info)
       });
     };
     service.getByTelAndPass = function (info) {

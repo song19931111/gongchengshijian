@@ -9,10 +9,10 @@
 
 
 <a  ui-sref="{{menu.url}}">
-    <i class="linecons-cog"></i>
+    <i class="linecons-mail"></i>
     <span class="title">{{menu.menuName}}</span>
 </a>
-<ul id="main-menu" class="main-menu" ng-if="menu.children.length>0">
+<ul  ng-if="menu.children.length>0">
     <li  ng-repeat="menu in menu.children"  ng-include="'tpls/navcontent.html'">
 
     </li>

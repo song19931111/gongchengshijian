@@ -2,7 +2,7 @@
  * Created by xiangsong on 2017/4/3.
  */
 angular.module('starter.services')
-    .constant('DOMAIN','test/');
+    .constant('DOMAIN','http://192.168.0.13:8080/Attendance/');
 angular.module('starter.services')
     .constant('PAGE_SIZE',5);
 angular.module('starter.services')
@@ -25,13 +25,13 @@ angular.module('starter.services')
         service.getAll = function() {
             return $http({
                 method:'GET'
-                ,url:DOMAIN + this.moduleName+'/getAll'
+                ,url:DOMAIN + this.moduleName+'getAll'
             });
         };
         service.getById = function (id) {
             return $http({
                 method:'GET'
-                ,url:DOMAIN + this.moduleName+'/getById'
+                ,url:DOMAIN + this.moduleName+'getById'
                 ,params:{
                     id:id
                 }
@@ -40,7 +40,7 @@ angular.module('starter.services')
         service.add = function (data) {
             return $http({
                 method:'POST'
-                ,url:DOMAIN + this.moduleName+"/add"
+                ,url:DOMAIN + this.moduleName+"add"
                 ,
                 data:angular.toJson(data)
             });
@@ -48,16 +48,14 @@ angular.module('starter.services')
         service.modify = function (data) {
             return $http({
                 method:'POST'
-                ,url:DOMAIN + this.moduleName+"/modify"
-                ,params:{
-                    data:data
-                }
+                ,url:DOMAIN + this.moduleName+"modify",
+              data:angular.toJson(data)
             });
         };
         service.delete = function (ids) {
             return $http({
                 method:'POST'
-                ,url:DOMAIN + this.moduleName+"/delete"
+                ,url:DOMAIN + this.moduleName+"delete"
                 ,params:{
                     ids:ids
                 }

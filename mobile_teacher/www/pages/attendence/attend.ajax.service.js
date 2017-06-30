@@ -24,6 +24,13 @@ angular.module('starter.services')
         params:{"infoId":id}
       });
     }
+    service.getStudentAttendInfo = function (id) {
+      return $http({
+        method:'GET'
+        ,url:DOMAIN + this.moduleName+"/getStudentAttendInfo",
+        params:{"infoId":id}
+      });
+    }
 
     return service;
   }]);

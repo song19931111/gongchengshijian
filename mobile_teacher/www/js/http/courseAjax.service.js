@@ -53,5 +53,17 @@ angular.module('starter.services')
 
       });
     }
+    service.getCourseInfoByDayAndTid = function (setDate) {
+        //教师设置课程的信息
+        return $http({
+          method:'GET'
+          ,url:DOMAIN + this.moduleName+"/getCourseInfoByDayAndTid",
+          params:{
+            date:setDate
+          }
+
+        });
+      }
+
     return service;
   }])

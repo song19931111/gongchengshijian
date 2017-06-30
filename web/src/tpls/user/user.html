@@ -1,23 +1,24 @@
+
 <div class="page-title">
 
     <div class="title-env">
-        <h1 class="title">DataTable</h1>
-        <p class="description">Dynamic table variants with pagination and other controls</p>
+        <h1 class="title">用户管理</h1>
+        <p class="description">对用户的管理操作</p>
     </div>
 
     <div class="breadcrumb-env">
 
         <ul class="breadcrumb bc-1">
             <li>
-                <a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+                <a><i class="fa-home"></i>Home</a>
             </li>
             <li>
 
-                <a href="tables-basic.html">Tables</a>
+                <a >用户管理</a>
             </li>
             <li class="active">
 
-                <strong>Data Tables</strong>
+                <strong>用户管理</strong>
             </li>
         </ul>
 
@@ -47,7 +48,7 @@
             <div class="col-sm-4">
                 <button class="btn btn-sm btn-primary"  ng-click="open('lg','none')">
                     <i class="fa fa-plus fa-lg"></i>新增用户</button>
-                <button class="btn btn-sm btn-primary" ng-click="setPower();">设置权限</button>
+                <!--<button class="btn btn-sm btn-primary" ng-click="setPower();">设置权限</button>-->
                 <button class="btn btn-sm btn-danger" ng-click="delete()">
                     <i class="fa fa-trash-o fa-lg" ></i>删除</button>
             </div>
@@ -90,7 +91,7 @@
                         <td>
                         <input type="checkbox" name="{{user.userid}}" class="cbr-primary" ng-checked="isSelected(user.userid)" ng-click="updateSelection($event,user.userid);"/>
                         </td>
-                        <td>{{user.username}}</td>
+                        <td>{{user.userName}}</td>
                         <td>{{user.tel}}</td>
                         <td>{{user.mail}}</td>
                         <td>{{user.createpeople}}</td>
@@ -101,7 +102,7 @@
                             <div class="dropdown">
                             <a  class="fa fa-sun-o  dropdown-toggle" aria-hidden="true" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a ng-click="open('lg',user);">新增用户</a></li>
+                                    <li><a ng-click="open('lg',user);">修改用户</a></li>
                                     <li><a ng-click="setPower(user.userid)">修改权限</a></li>
 
                                 </ul>
@@ -122,15 +123,15 @@
 
 
 
-<!-- Table exporting -->
+<!--&lt;!&ndash; Table exporting &ndash;&gt;-->
 
-</div>
-
-
-</div>
-
-</div>
-<!-- end: Chat Section -->
+<!--</div>-->
 
 
-</div>
+<!--</div>-->
+
+<!--</div>-->
+<!--&lt;!&ndash; end: Chat Section &ndash;&gt;-->
+
+
+<!--</div>-->

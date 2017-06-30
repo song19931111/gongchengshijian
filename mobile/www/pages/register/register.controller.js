@@ -30,8 +30,8 @@
 
       //$scope.colleageList = ["福州大学","厦门大学","哈尔滨工业大学"];
       $scope.colleageList ="";
-      userAjaxService.getColleageName().success(function(data,status,headers,config){
-        scope.colleageList = data;
+      userAjaxService.getAllColleageName().success(function(data,status,headers,config){
+        $scope.colleageList = data.colleagelist;
         $ionicLoading.hide();
       }).error(function(data,status,headers,config){
         $ionicLoading.hide();
@@ -49,7 +49,7 @@
         });
         //console.log($scope.regInfo);
         userAjaxService.getColleageInfoByName($scope.regInfo.colleageName).success(function(data,status,headers,config){
-          $scope.colleageInfo = data;
+          $scope.colleageInfo = data.colleageinfo;
           $ionicLoading.hide();
         }).error(function(data,status,headers,config){
           $ionicLoading.hide();
